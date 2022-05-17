@@ -1,0 +1,30 @@
+/local.properties
+/captures
+# Built application files
+*.ap_
+*.apk
+
+# Generated files
+bin/
+gen/
+
+# Intellij IDEA
+*.iml
+*.ipr
+*.iws
+.idea/*
+out/
+.d
+
+# Android Studio and Gradle specific entries
+.gradle
+.navigation
+build
+# Mac .DS_Store files
+.DS_Store
+
+true/
+# NDK
+obj/
+ss.si4project
+/.idea/*
