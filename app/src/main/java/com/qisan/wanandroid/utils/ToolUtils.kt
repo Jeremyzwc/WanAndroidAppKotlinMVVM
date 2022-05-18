@@ -5,12 +5,12 @@ package com.qisan.wanandroid.utils
  * com.qisan.wanandroid.utils
  */
 
-inline fun <reified T> Any.saveAsInline() : T{
+inline fun <reified T> Any.saveAs() : T{
     return this as T
 }
 
 @Suppress("UNCHECKED_CAST")
-fun <T> Any.saveAs() : T{
+fun <T> Any.saveAsUnChecked() : T{
     return this as T
 }
 

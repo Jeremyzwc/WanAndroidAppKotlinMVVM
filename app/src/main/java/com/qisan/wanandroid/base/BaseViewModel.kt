@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.qisan.wanandroid.WanApplication
 import com.qisan.wanandroid.utils.saveAs
+import com.qisan.wanandroid.utils.saveAsUnChecked
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
@@ -39,6 +40,6 @@ abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,BaseViewOperate {
 
 class ViewModelFactory(private val viewModel: BaseViewModel) : ViewModelProvider.Factory{
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return viewModel.saveAs()
+        return viewModel.saveAsUnChecked()
     }
 }
