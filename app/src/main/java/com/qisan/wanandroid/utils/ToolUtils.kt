@@ -5,6 +5,15 @@ package com.qisan.wanandroid.utils
  * com.qisan.wanandroid.utils
  */
 
-fun <T> Any.saveAs():T{
+inline fun <reified T> Any.saveAsInline() : T{
     return this as T
+}
+
+@Suppress("UNCHECKED_CAST")
+fun <T> Any.saveAs() : T{
+    return this as T
+}
+
+inline fun <reified T> Any.isEqualType() : Boolean{
+    return this is T
 }
