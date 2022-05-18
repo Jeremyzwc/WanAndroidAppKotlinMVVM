@@ -14,6 +14,8 @@ fun <T> Any.saveAsUnChecked() : T{
     return this as T
 }
 
+
+
 inline fun <reified T> Any.isEqualType() : Boolean{
     return this is T
 }
