@@ -1,11 +1,20 @@
 package com.qisan.wanandroid
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import com.qisan.wanandroid.base.BaseActivity
+import com.qisan.wanandroid.databinding.ActivityMainBinding
+import com.qisan.wanandroid.vm.MainViewModel
 
-class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(){
+
+    override fun getLayoutId(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun bindViewModel(): MainViewModel {
+        return MainViewModel()
+    }
+
+    override fun initData() {
+
     }
 }
