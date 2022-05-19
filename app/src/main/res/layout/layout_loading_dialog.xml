@@ -2,31 +2,45 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="desc"
+            type="String" />
+
+    </data>
+
     <LinearLayout
         android:id="@+id/layout_loading"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
 
             <ProgressBar
-                style="@android:attr/progressBarStyleSmallInverse"
-                android:layout_width="80dp"
-                android:layout_height="80dp" />
+                style="?android:attr/progressBarStyleInverse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp" />
 
             <TextView
                 android:id="@+id/tv_loading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="加载中..."
-                android:textColor="#F3F3F4"
+                android:layout_marginStart="8dp"
+                android:text="@{desc}"
+                android:textColor="@color/purple_500"
                 android:textSize="16sp"
                 tools:ignore="HardcodedText" />
         </LinearLayout>

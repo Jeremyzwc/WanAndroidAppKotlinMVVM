@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.qisan.wanandroid.WanApplication
+import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.saveAs
 
 /**
@@ -17,6 +18,10 @@ abstract class BaseActivity<VB : ViewDataBinding,VM : BaseViewModel> : AppCompat
 
     private lateinit var viewDataBinding : VB
     protected lateinit var viewModel : VM
+
+    protected var isShowLoadingLayout = false
+
+    protected val loadingDialog by lazy { LoadingDialog(this) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +43,7 @@ abstract class BaseActivity<VB : ViewDataBinding,VM : BaseViewModel> : AppCompat
     private fun initDataBinding(){
         viewDataBinding = DataBindingUtil.setContentView(this,getLayoutId())
         viewDataBinding.lifecycleOwner = this
+
     }
 
     private fun initViewModel(){
@@ -60,5 +66,14 @@ abstract class BaseActivity<VB : ViewDataBinding,VM : BaseViewModel> : AppCompat
         super.onDestroy()
         viewDataBinding.unbind()
         lifecycle.removeObserver(viewModel)
+    }
+
+    fun showLoadingView(desc : String) {
+
+        loadingDialog.showLoading(desc)
+    }
+
+    fun showLoadingView() {
+        loadingDialog.showLoading()
     }
 }
