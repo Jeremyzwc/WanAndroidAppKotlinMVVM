@@ -2,16 +2,15 @@ package com.qisan.wanandroid.dialog
 
 import android.content.Context
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseLifecycleDialog
-import com.qisan.wanandroid.databinding.LayoutLoadingDialogBinding
+import com.qisan.wanandroid.databinding.DialogLayoutLoadingBinding
 
 /**
  * Created by qisan 2022/5/18
  * com.qisan.wanandroid.dialog
  */
-class LoadingDialog(context: Context) : BaseLifecycleDialog<LayoutLoadingDialogBinding>(context) {
+class LoadingDialog(context: Context) : BaseLifecycleDialog<DialogLayoutLoadingBinding>(context) {
 
     var desc = ""
 
@@ -22,7 +21,7 @@ class LoadingDialog(context: Context) : BaseLifecycleDialog<LayoutLoadingDialogB
     }
 
     override fun getLayoutId(): Int {
-        return R.layout.layout_loading_dialog
+        return R.layout.dialog_layout_loading
     }
 
     fun showLoading(desc : String) {

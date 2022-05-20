@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.asStateFlow
  * Created by qisan 2022/5/17
  * com.qisan.wanandroid.base
  */
-abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,BaseViewOperate {
+abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,IView {
 
     lateinit var application: WanApplication
 
@@ -20,21 +20,31 @@ abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,BaseViewOperate {
     //设置成只读flow来订阅接收数据
     val loadingViewStateFlow = loadingViewMutableStateFlow.asStateFlow()
 
-    override fun showLoading() {
-
-        loadingViewMutableStateFlow.value = true
-    }
-
-    override fun closeLoading() {
-
-        loadingViewMutableStateFlow.value = false
-    }
-
 
     companion object {
         fun <T : BaseViewModel> createViewModelFactory(viewModel: T) : ViewModelProvider.Factory{
             return ViewModelFactory(viewModel)
         }
+    }
+
+    override fun showDialogLoading() {
+
+    }
+
+    override fun closeDialogLoading() {
+
+    }
+
+    override fun showLayoutLoading() {
+
+    }
+
+    override fun hideLayoutLoading() {
+
+    }
+
+    override fun showLoadError(errorMsg: String) {
+
     }
 }
 
