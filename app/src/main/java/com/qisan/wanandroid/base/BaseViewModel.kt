@@ -20,13 +20,6 @@ abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,IView {
     //设置成只读flow来订阅接收数据
     val loadingViewStateFlow = loadingViewMutableStateFlow.asStateFlow()
 
-
-    companion object {
-        fun <T : BaseViewModel> createViewModelFactory(viewModel: T) : ViewModelProvider.Factory{
-            return ViewModelFactory(viewModel)
-        }
-    }
-
     override fun showDialogLoading() {
 
     }
@@ -48,8 +41,3 @@ abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,IView {
     }
 }
 
-class ViewModelFactory(private val viewModel: BaseViewModel) : ViewModelProvider.Factory{
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return viewModel.saveAsUnChecked()
-    }
-}

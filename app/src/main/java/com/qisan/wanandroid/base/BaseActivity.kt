@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.qisan.wanandroid.WanApplication
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.saveAs
+import java.lang.reflect.ParameterizedType
 
 /**
  * Created by qisan 2022/5/17
@@ -17,7 +18,12 @@ import com.qisan.wanandroid.utils.saveAs
 abstract class BaseActivity<VB : ViewDataBinding,VM : BaseViewModel> : AppCompatActivity() {
 
     private lateinit var viewDataBinding : VB
-    protected lateinit var viewModel : VM
+
+    protected val viewModel: VM by lazy {
+        val type = javaClass.genericSuperclass
+        val modelClass: Class<VM> = type!!.saveAs<ParameterizedType>().actualTypeArguments[1].saveAs()
+        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(modelClass)
+    }
 
     protected var isShowLoadingLayout = false
 
@@ -47,15 +53,9 @@ abstract class BaseActivity<VB : ViewDataBinding,VM : BaseViewModel> : AppCompat
     }
 
     private fun initViewModel(){
-        //拿到实际的ViewModel
-        val vm = bindViewModel()
-        viewModel = ViewModelProvider(this,BaseViewModel.createViewModelFactory(vm)).get(vm::class.java)
         viewModel.application = application.saveAs()
         lifecycle.removeObserver(viewModel)
     }
-
-    //在activity中返回对应的ViewModel
-    protected abstract fun bindViewModel(): VM
 
     fun getActivityVm(): VM {
 

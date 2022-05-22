@@ -11,10 +11,6 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(){
         return R.layout.activity_main
     }
 
-    override fun bindViewModel(): MainViewModel {
-        return MainViewModel()
-    }
-
     override fun initData() {
 
     }
