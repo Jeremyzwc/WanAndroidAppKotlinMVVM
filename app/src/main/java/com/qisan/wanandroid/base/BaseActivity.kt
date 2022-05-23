@@ -38,6 +38,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         initViewModel()
         initData()
         initCommObserver()
+        initListener()
     }
 
     @LayoutRes
@@ -56,7 +57,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
 
     private fun initViewModel() {
         viewModel.application = application.saveAs()
-        lifecycle.removeObserver(viewModel)
+        lifecycle.addObserver(viewModel)
     }
 
     fun getActivityVm(): VM {
@@ -90,7 +91,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
 
         viewModel.dialogLoadingEvent.observe(this) {
             if (it.loadingState) {
-                if (TextUtils.isEmpty(it.loadingMsg)) loadingDialog.showLoading() else loadingDialog.showLoading(it.loadingMsg)
+                if (TextUtils.isEmpty(it.loadingMsg)) showDialogloading() else showDialogloading(it.loadingMsg)
             }else{
                 loadingDialog.dismiss()
             }
