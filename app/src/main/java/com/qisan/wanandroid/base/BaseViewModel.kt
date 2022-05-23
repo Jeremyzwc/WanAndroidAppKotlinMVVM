@@ -1,43 +1,39 @@
 package com.qisan.wanandroid.base
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import com.kunminx.architecture.ui.callback.UnPeekLiveData
 import com.qisan.wanandroid.WanApplication
-import com.qisan.wanandroid.utils.saveAs
-import com.qisan.wanandroid.utils.saveAsUnChecked
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
+import com.qisan.wanandroid.entity.DialogLoadingEvent
+import com.qisan.wanandroid.entity.LoadingErrorEvent
 
 /**
  * Created by qisan 2022/5/17
  * com.qisan.wanandroid.base
  */
-abstract class BaseViewModel : ViewModel(), ViewModelLifecycle,IView {
+abstract class BaseViewModel : ViewModel(), ViewModelLifecycle, IView {
 
     lateinit var application: WanApplication
 
-    private val loadingViewMutableStateFlow = MutableStateFlow(false)
-    //设置成只读flow来订阅接收数据
-    val loadingViewStateFlow = loadingViewMutableStateFlow.asStateFlow()
+    val dialogLoadingEvent = UnPeekLiveData<DialogLoadingEvent>()
+    val layoutLoadingEvent = UnPeekLiveData<Boolean>()
+    val loadErrorEvent = UnPeekLiveData<LoadingErrorEvent>()
 
-    override fun showDialogLoading() {
 
-    }
-
-    override fun closeDialogLoading() {
-
+    override fun showDialogLoading(loadingEnevt: DialogLoadingEvent) {
+        dialogLoadingEvent.postValue(loadingEnevt)
     }
 
     override fun showLayoutLoading() {
-
+        layoutLoadingEvent.postValue(true)
     }
 
     override fun hideLayoutLoading() {
-
+        layoutLoadingEvent.postValue(false)
     }
 
-    override fun showLoadError(errorMsg: String) {
-
+    override fun showLoadError(loadingErrorEvent: LoadingErrorEvent) {
+        loadErrorEvent.postValue(loadingErrorEvent)
     }
+
 }
 
