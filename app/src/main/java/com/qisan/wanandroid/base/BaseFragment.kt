@@ -38,7 +38,7 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        viewDataBinding = DataBindingUtil.inflate<VB>(inflater, getLayoutId(), container, false)
+        viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         return run {
             viewDataBinding.lifecycleOwner = this
             viewDataBinding.root
@@ -54,7 +54,6 @@ abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment
         super.onCreate(savedInstanceState)
 
         initViewModel()
-
         initCommObserver()
     }
 

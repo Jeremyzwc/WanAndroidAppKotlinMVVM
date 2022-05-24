@@ -1,8 +1,8 @@
-package com.qisan.wanandroid
+package com.qisan.wanandroid.ui.activity
 
+import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.databinding.ActivityMainBinding
-import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.vm.MainViewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(){

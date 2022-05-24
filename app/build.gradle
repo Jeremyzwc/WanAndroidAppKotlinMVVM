@@ -51,5 +51,9 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     //LiveData处理activity销毁重建的数据倒灌问题，可以被多个观察者订阅
     implementation 'com.kunminx.arch:unpeek-livedata:7.2.0-beta1'
-
+    //导航组件
+    implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
+    implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
+    //适配
+    implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
 }
