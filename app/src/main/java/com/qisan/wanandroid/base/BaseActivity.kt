@@ -17,7 +17,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
 
-    private lateinit var viewDataBinding: VB
+    protected lateinit var viewDataBinding: VB
 
     protected val viewModel: VM by lazy {
         val type = javaClass.genericSuperclass

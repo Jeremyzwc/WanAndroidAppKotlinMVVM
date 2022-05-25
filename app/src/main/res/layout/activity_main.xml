@@ -16,16 +16,19 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/nav_host_fragment"
                 android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:defaultNavHost="true" />
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:defaultNavHost="true"
+                app:navGraph="@navigation/main_navigation"
+                tools:layout_editor_absoluteX="0dp"/>
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/tab_navi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:menu="@menu/menu_tab"
-                android:layout_gravity="bottom"/>
+                android:layout_gravity="bottom"
+                app:labelVisibilityMode="labeled"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

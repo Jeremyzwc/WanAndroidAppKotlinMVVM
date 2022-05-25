@@ -13,4 +13,7 @@ class SquareFragment : BaseFragment<FragmentSquareBinding, SquareViewModel>() {
     override fun getLayoutId(): Int {
         return R.layout.fragment_square
     }
+
+    override fun initData() {
+    }
 }

@@ -17,4 +17,8 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
         return R.layout.fragment_wechat
     }
 
+    override fun initData() {
+
+    }
+
 }

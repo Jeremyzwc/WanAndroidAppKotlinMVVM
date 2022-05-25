@@ -40,7 +40,7 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
 
         viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
         return run {
-            viewDataBinding.lifecycleOwner = this
+            viewDataBinding.lifecycleOwner = viewLifecycleOwner
             viewDataBinding.root
         }
 
@@ -48,19 +48,21 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        initViewModel()
+        initCommObserver()
+
+        initData()
+
+        lifecycle.addObserver(viewModel)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        initViewModel()
-        initCommObserver()
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        lifecycle.addObserver(viewModel)
-    }
+    protected abstract fun initData()
 
     private fun initViewModel() {
         viewModel.application = requireActivity().application.saveAs()
@@ -99,7 +101,7 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
 
     protected fun initCommObserver() {
 
-        viewModel.dialogLoadingEvent.observe(this) {
+        viewModel.dialogLoadingEvent.observe(viewLifecycleOwner) {
             if (it.loadingState) {
                 if (TextUtils.isEmpty(it.loadingMsg)) showDialogloading() else showDialogloading(it.loadingMsg)
             }else{
@@ -107,11 +109,11 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
             }
         }
 
-        viewModel.layoutLoadingEvent.observe(this){
+        viewModel.layoutLoadingEvent.observe(viewLifecycleOwner){
             isShowLoadingLayout = it
         }
 
-        viewModel.loadErrorEvent.observe(this){
+        viewModel.loadErrorEvent.observe(viewLifecycleOwner){
             isShowErrorLayout = it.loadingErrorState
             errorMsg = it.loadingErrorMsg
         }

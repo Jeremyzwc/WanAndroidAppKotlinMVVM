@@ -16,4 +16,8 @@ class SystemFragment : BaseFragment<FragmentSystemBinding,HomeViewModel>() {
         return R.layout.fragment_system
     }
 
+    override fun initData() {
+
+    }
+
 }

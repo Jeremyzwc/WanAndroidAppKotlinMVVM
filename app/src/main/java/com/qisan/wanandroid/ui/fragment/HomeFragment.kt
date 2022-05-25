@@ -1,5 +1,6 @@
 package com.qisan.wanandroid.ui.fragment
 
+import android.util.Log
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentHomeBinding
@@ -13,6 +14,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>() {
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
+    }
+
+    override fun initData() {
+        Log.e("HomeFragment","HomeFragment")
     }
 
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/action_home">
+
+    <fragment
+        android:id="@+id/action_home"
+        android:name="com.qisan.wanandroid.ui.fragment.HomeFragment"
+        android:label="home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/action_square"
+        android:name="com.qisan.wanandroid.ui.fragment.SquareFragment"
+        android:label="square"
+        tools:layout="@layout/fragment_square" />
+
+    <fragment
+        android:id="@+id/action_wechat"
+        android:name="com.qisan.wanandroid.ui.fragment.WeChatFragment"
+        android:label="wechat"
+        tools:layout="@layout/fragment_wechat" />
+
+    <fragment
+        android:id="@+id/action_system"
+        android:name="com.qisan.wanandroid.ui.fragment.SystemFragment"
+        android:label="system"
+        tools:layout="@layout/fragment_system" />
+
+    <fragment
+        android:id="@+id/action_project"
+        android:name="com.qisan.wanandroid.ui.fragment.ProjectFragment"
+        android:label="project"
+        tools:layout="@layout/fragment_projcet" />
+
+</navigation>
