@@ -20,7 +20,7 @@ import java.lang.reflect.ParameterizedType
  * Created by qisan 2022/5/20
  * com.qisan.wanandroid.base
  */
-abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
 
     private lateinit var viewDataBinding: VB
 
