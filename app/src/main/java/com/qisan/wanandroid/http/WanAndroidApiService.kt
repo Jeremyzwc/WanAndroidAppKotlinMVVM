@@ -6,8 +6,5 @@ package com.qisan.wanandroid.http
  */
 interface WanAndroidApiService {
 
-
-
-
-
+    
 }

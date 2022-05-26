@@ -1,6 +1,8 @@
 package com.qisan.wanandroid.http
 
 import androidx.viewbinding.BuildConfig
+import com.qisan.wanandroid.http.interceptor.HeaderInterceptor
+import com.qisan.wanandroid.http.interceptor.SaveCookieInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.converter.gson.GsonConverterFactory
@@ -13,8 +15,6 @@ import java.util.concurrent.TimeUnit
  * com.qisan.wanandroid.http
  */
 
-private const val TIME_OUT = 30
-
 val apiService: WanAndroidApiService by lazy {
     val retrofit = retrofit2.Retrofit.Builder()
         .client(okHttpClient)
@@ -25,10 +25,15 @@ val apiService: WanAndroidApiService by lazy {
     retrofit.create(WanAndroidApiService::class.java)
 }
 
-private val okHttpClient : OkHttpClient by lazy {
+private val okHttpClient: OkHttpClient by lazy {
     val builder = OkHttpClient.Builder()
         .addInterceptor(getHttpLoggingInterceptor())
-        .connectTimeout(TIME_OUT.toLong(), TimeUnit.SECONDS)
+        .addInterceptor(HeaderInterceptor())
+        .addInterceptor(SaveCookieInterceptor())
+        .connectTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        .readTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        .writeTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+        .retryOnConnectionFailure(true) // 错误重连
     builder.build()
 }
 

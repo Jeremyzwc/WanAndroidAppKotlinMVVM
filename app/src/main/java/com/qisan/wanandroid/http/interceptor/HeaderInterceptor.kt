@@ -1,5 +1,6 @@
-package com.qisan.wanandroid.http
+package com.qisan.wanandroid.http.interceptor
 
+import com.qisan.wanandroid.http.HttpConstant
 import com.qisan.wanandroid.utils.SharePreferenceUtils
 import okhttp3.Interceptor
 import okhttp3.Response
