@@ -2,7 +2,6 @@ package com.qisan.wanandroid.ui.activity
 
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.databinding.ActivityMainBinding
