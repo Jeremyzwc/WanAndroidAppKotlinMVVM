@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.entity
+package com.qisan.wanandroid.http
 
 import java.io.Serializable
 

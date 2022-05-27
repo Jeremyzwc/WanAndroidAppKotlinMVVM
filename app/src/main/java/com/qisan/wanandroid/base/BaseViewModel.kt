@@ -17,9 +17,14 @@ abstract class BaseViewModel : ViewModel(), ViewModelLifecycle, IView {
     val dialogLoadingEvent = UnPeekLiveData<DialogLoadingEvent>()
     val layoutLoadingEvent = UnPeekLiveData<Boolean>()
     val loadErrorEvent = UnPeekLiveData<LoadingErrorEvent>()
+    val requestErrorEvent = UnPeekLiveData<String>()
 
 
     override fun showDialogLoading(loadingEnevt: DialogLoadingEvent) {
+        dialogLoadingEvent.postValue(loadingEnevt)
+    }
+
+    override fun cloaseDialogLoading(loadingEnevt: DialogLoadingEvent) {
         dialogLoadingEvent.postValue(loadingEnevt)
     }
 

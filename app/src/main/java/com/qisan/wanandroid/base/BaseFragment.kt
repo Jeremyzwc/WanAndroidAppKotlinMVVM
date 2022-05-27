@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.qisan.wanandroid.WanApplication
 import com.qisan.wanandroid.dialog.LoadingDialog
+import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
 import java.lang.reflect.ParameterizedType
 
@@ -22,7 +23,7 @@ import java.lang.reflect.ParameterizedType
  */
 open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
 
-    private lateinit var viewDataBinding: VB
+    lateinit var viewDataBinding: VB
 
     protected val viewModel: VM by lazy {
         val type = javaClass.genericSuperclass
@@ -110,12 +111,18 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
         }
 
         viewModel.layoutLoadingEvent.observe(viewLifecycleOwner){
-            isShowLoadingLayout = it
+//            isShowLoadingLayout = it
         }
 
         viewModel.loadErrorEvent.observe(viewLifecycleOwner){
             isShowErrorLayout = it.loadingErrorState
             errorMsg = it.loadingErrorMsg
         }
+
+        viewModel.requestErrorEvent.observe(viewLifecycleOwner){
+            ToastUtils.show(it)
+        }
     }
+
+    open fun showLoading(){}
 }

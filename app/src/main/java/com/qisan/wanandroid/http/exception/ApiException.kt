@@ -13,4 +13,8 @@ class ApiException : RuntimeException {
     }
 
     constructor(message: String) : super(Throwable(message))
+
+    constructor(message: String,code: Int) : super(Throwable(message)){
+        this.code = code
+    }
 }

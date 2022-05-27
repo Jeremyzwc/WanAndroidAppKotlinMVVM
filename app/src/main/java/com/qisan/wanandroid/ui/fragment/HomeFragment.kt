@@ -17,7 +17,18 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>() {
     }
 
     override fun initData() {
-        Log.e("HomeFragment","HomeFragment")
+
+//        viewDataBinding.isShowLoadingLayout = isShowLoadingLayout
+
+        viewModel.getArticleList()
+
+        viewModel.articleLiveData.observe(this){
+            Log.e("",it.toString())
+        }
     }
 
+    override fun showLoading() {
+        super.showLoading()
+//        viewDataBinding.isShowLoadingLayout = true
+    }
 }

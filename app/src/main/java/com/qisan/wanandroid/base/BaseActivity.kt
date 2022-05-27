@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import com.qisan.wanandroid.dialog.LoadingDialog
+import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
 import java.lang.reflect.ParameterizedType
 
@@ -104,6 +105,10 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         viewModel.loadErrorEvent.observe(this){
             isShowErrorLayout = it.loadingErrorState
             errorMsg = it.loadingErrorMsg
+        }
+
+        viewModel.requestErrorEvent.observe(this) {
+            ToastUtils.show(it)
         }
     }
 }

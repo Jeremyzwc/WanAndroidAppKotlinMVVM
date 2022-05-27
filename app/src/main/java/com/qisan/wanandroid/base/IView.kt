@@ -14,6 +14,7 @@ interface IView {
      */
     fun showDialogLoading(loadingEnevt: DialogLoadingEvent)
 
+    fun cloaseDialogLoading(loadingEnevt: DialogLoadingEvent)
     /**
      * 页面加载数据时的loading提示
      */
@@ -29,5 +30,8 @@ interface IView {
      */
     fun showLoadError(loadingErrorEvent: LoadingErrorEvent)
 
+    /**
+     * showTosat
+     */
 
 }

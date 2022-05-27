@@ -15,7 +15,7 @@
         android:id="@+id/rl_loading"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="@{isShowLoadingLayout ? View.VISIBLE : View.GONE,default=gone}">
+        android:visibility="@{isShowLoadingLayout ? View.VISIBLE : View.GONE,default=visible}">
 
         <ProgressBar
             android:id="@+id/progressBar2"
