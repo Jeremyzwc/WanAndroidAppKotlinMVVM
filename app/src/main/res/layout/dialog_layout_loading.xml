@@ -1,50 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="desc"
-            type="String" />
-
-    </data>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_loading"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/layout_loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <ProgressBar
+            style="?android:attr/progressBarStyleInverse"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            tools:ignore="UselessParent">
+            android:layout_marginStart="4dp" />
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleInverse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp" />
-
-            <TextView
-                android:id="@+id/tv_loading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@{desc}"
-                android:textColor="@color/purple_500"
-                android:textSize="16sp"
-                tools:ignore="HardcodedText" />
-        </LinearLayout>
-
+        <TextView
+            android:id="@+id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{desc}"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
     </LinearLayout>
 
-</layout>
+</LinearLayout>
+
+

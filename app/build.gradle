@@ -32,8 +32,8 @@ android {
         jvmTarget = '1.8'
     }
 
-    dataBinding {
-        enabled = true
+    buildFeatures{
+        viewBinding true
     }
 }
 
@@ -64,4 +64,6 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:4.9.3"
     //下拉刷新
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
+
+    implementation "com.github.bumptech.glide:glide:4.13.1"
 }

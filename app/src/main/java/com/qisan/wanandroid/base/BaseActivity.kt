@@ -2,40 +2,49 @@ package com.qisan.wanandroid.base
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
+import com.qisan.wanandroid.utils.saveAsUnChecked
 import java.lang.reflect.ParameterizedType
 
 /**
  * Created by qisan 2022/5/17
  * com.qisan.wanandroid.base
  */
-abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompatActivity() {
+abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatActivity() {
 
-    protected lateinit var viewDataBinding: VB
+    protected var viewBinding: VB? = null
+        get() = _viewBinding
+
+    private val _viewBinding: VB by lazy {
+        val type = javaClass.genericSuperclass
+        val vbClass: Class<VB> = type!!.saveAs<ParameterizedType>().actualTypeArguments[0].saveAs()
+        val method = vbClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+        method.invoke(this, layoutInflater)!!.saveAsUnChecked()
+    }
 
     protected val viewModel: VM by lazy {
         val type = javaClass.genericSuperclass
-        val modelClass: Class<VM> = type!!.saveAs<ParameterizedType>().actualTypeArguments[1].saveAs()
-        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(modelClass)
+        val vmClass: Class<VM> = type!!.saveAs<ParameterizedType>().actualTypeArguments[1].saveAs()
+        ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(vmClass)
     }
 
     protected val loadingDialog by lazy { LoadingDialog(this) }
 
     protected var isShowLoadingLayout = false
     protected var isShowErrorLayout = false
-    protected lateinit var errorMsg : String
+    protected lateinit var errorMsg: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initDataBinding()
+        setContentView(viewBinding?.root)
         initViewModel()
         initData()
         initCommObserver()
@@ -50,11 +59,6 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
     //事件监听处理，非必须
     protected fun initListener() {}
 
-    private fun initDataBinding() {
-        viewDataBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        viewDataBinding.lifecycleOwner = this
-
-    }
 
     private fun initViewModel() {
         viewModel.application = application.saveAs()
@@ -68,7 +72,7 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
 
     override fun onDestroy() {
         super.onDestroy()
-        viewDataBinding.unbind()
+        viewBinding = null
         lifecycle.removeObserver(viewModel)
     }
 
@@ -93,16 +97,16 @@ abstract class BaseActivity<VB : ViewDataBinding, VM : BaseViewModel> : AppCompa
         viewModel.dialogLoadingEvent.observe(this) {
             if (it.loadingState) {
                 if (TextUtils.isEmpty(it.loadingMsg)) showDialogloading() else showDialogloading(it.loadingMsg)
-            }else{
+            } else {
                 loadingDialog.dismiss()
             }
         }
 
-        viewModel.layoutLoadingEvent.observe(this){
+        viewModel.layoutLoadingEvent.observe(this) {
             isShowLoadingLayout = it
         }
 
-        viewModel.loadErrorEvent.observe(this){
+        viewModel.loadErrorEvent.observe(this) {
             isShowErrorLayout = it.loadingErrorState
             errorMsg = it.loadingErrorMsg
         }

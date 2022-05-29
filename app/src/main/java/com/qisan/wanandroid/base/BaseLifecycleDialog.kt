@@ -9,22 +9,29 @@ import android.view.WindowManager
 import androidx.annotation.FloatRange
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDialog
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
+import androidx.viewbinding.ViewBinding
 import com.qisan.wanandroid.utils.isEqualType
 import com.qisan.wanandroid.utils.saveAs
+import com.qisan.wanandroid.utils.saveAsUnChecked
+import java.lang.reflect.ParameterizedType
 
 /**
  * Created by QiSan 2022/5/18
  * package com.qisan.wanandroid.base
  */
-abstract class BaseLifecycleDialog<VDB : ViewDataBinding> : AlertDialog, DefaultLifecycleObserver {
+abstract class BaseLifecycleDialog<VB : ViewBinding> : AlertDialog, DefaultLifecycleObserver {
 
-    protected lateinit var viewDataBinding: VDB
+    protected var viewBinding: VB? = null
+        get() = _viewBinding
+
+    private val _viewBinding: VB by lazy {
+        val type = javaClass.genericSuperclass
+        val vbClass: Class<VB> = type!!.saveAs<ParameterizedType>().actualTypeArguments[0].saveAs()
+        val method = vbClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+        method.invoke(this, layoutInflater)!!.saveAsUnChecked()
+    }
 
     //属性设置
     private var width: Int = ViewGroup.LayoutParams.WRAP_CONTENT
@@ -46,11 +53,11 @@ abstract class BaseLifecycleDialog<VDB : ViewDataBinding> : AlertDialog, Default
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super<AlertDialog>.onCreate(savedInstanceState)
-        initContentView()
+
+        viewBinding?.let { setContentView(it.root) }
+
         lifecycleOwner?.addObserver(this)
-
         initData(savedInstanceState)
-
         refreshAttributes()
     }
 
@@ -69,14 +76,6 @@ abstract class BaseLifecycleDialog<VDB : ViewDataBinding> : AlertDialog, Default
 
     protected abstract @LayoutRes
     fun getLayoutId(): Int
-
-    private fun initContentView() {
-        viewDataBinding = DataBindingUtil.inflate(
-            LayoutInflater.from(context),
-            getLayoutId(), null, false
-        )
-        setContentView(viewDataBinding.root)
-    }
 
     protected open fun initData(savedInstanceState: Bundle?) {
 

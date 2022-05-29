@@ -1,40 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_no_data"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:visibility="gone">
 
-<layout>
+    <ImageView
+        android:id="@+id/iv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/app_name"
+        android:scaleType="centerCrop"
+        android:src="@drawable/noting" />
 
-    <data>
-        <variable
-            name="isShowErrorLayout"
-            type="Boolean" />
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text=""
+        android:textColor="@color/black" />
 
-        <import type="android.view.View"/>
-    </data>
+</LinearLayout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/ll_no_data"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="@{isShowErrorLayout ? View.VISIBLE : View.GONE,default=gone}">
 
-        <ImageView
-            android:id="@+id/iv_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/noting"
-            android:scaleType="centerCrop"
-            android:contentDescription="@string/app_name"/>
-
-        <TextView
-            android:id="@+id/tv_no_data"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text=""
-            android:textColor="@color/black" />
-
-    </LinearLayout>
-
-</layout>
 

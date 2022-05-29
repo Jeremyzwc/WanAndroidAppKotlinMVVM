@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.drawerlayout.widget.DrawerLayout xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/drawer_layout"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        tools:openDrawer="start">
+        android:layout_height="match_parent">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nav_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:defaultNavHost="true"
+            app:navGraph="@navigation/main_navigation"
+            tools:layout_editor_absoluteX="0dp" />
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/nav_host_fragment"
-                android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:defaultNavHost="true"
-                app:navGraph="@navigation/main_navigation"
-                tools:layout_editor_absoluteX="0dp"/>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/tab_navi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/menu_tab" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/tab_navi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/menu_tab"
-                android:layout_gravity="bottom"
-                app:labelVisibilityMode="labeled"/>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
 
-    </androidx.drawerlayout.widget.DrawerLayout>
-
-</layout>
 

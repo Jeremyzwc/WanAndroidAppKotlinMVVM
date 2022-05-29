@@ -19,8 +19,8 @@ class MainActivity : BaseActivity<ActivityMainBinding,MainViewModel>(){
         val navHost: NavHostFragment? = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment)?.saveAs<NavHostFragment>()
         val navController = navHost?.navController
-        val bottomNaviView = viewDataBinding.tabNavi
-        navController?.let { bottomNaviView.setupWithNavController(it) }
+        val bottomNaviView = viewBinding?.tabNavi
+        navController?.let { bottomNaviView?.setupWithNavController(it) }
 
     }
 }

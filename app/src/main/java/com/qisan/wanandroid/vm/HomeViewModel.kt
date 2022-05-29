@@ -1,12 +1,12 @@
 package com.qisan.wanandroid.vm
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.cachedIn
 import com.qisan.wanandroid.base.BaseViewModel
-import com.qisan.wanandroid.entity.ArticleResponseBody
-import com.qisan.wanandroid.http.launchFlow
-import com.qisan.wanandroid.http.next
-import kotlinx.coroutines.launch
+import com.qisan.wanandroid.entity.ArticlePagingSource
 
 /**
  * Created by qisan 2022/5/25
@@ -14,19 +14,25 @@ import kotlinx.coroutines.launch
  */
 class HomeViewModel : BaseViewModel() {
 
-    val articleLiveData = MutableLiveData<ArticleResponseBody?>()
+//    val articleLiveData = MutableLiveData<ArticleResponseBody?>()
+
+    val articleLiveData  =
+        Pager(PagingConfig(20)) { ArticlePagingSource() }
+            .flow
+            .cachedIn(viewModelScope)
+            .asLiveData(viewModelScope.coroutineContext)
 
     /**
      * 获取首页列表
      */
-    fun getArticleList() {
-        viewModelScope.launch {
-            launchFlow {
-                getArticles(0)
-            }.next {
-                articleLiveData.postValue(data)
-            }
-        }
-    }
+//    fun getArticleList() {
+//        viewModelScope.launch {
+//            launchFlow {
+//                getArticles(0)
+//            }.next {
+//                articleLiveData.postValue(data)
+//            }
+//        }
+//    }
 
 }

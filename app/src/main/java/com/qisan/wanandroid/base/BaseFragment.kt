@@ -1,29 +1,35 @@
 package com.qisan.wanandroid.base
 
-import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.qisan.wanandroid.WanApplication
+import androidx.viewbinding.ViewBinding
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
+import com.qisan.wanandroid.utils.saveAsUnChecked
 import java.lang.reflect.ParameterizedType
 
 /**
  * Created by qisan 2022/5/20
  * com.qisan.wanandroid.base
  */
-open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fragment() {
+open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragment() {
 
-    lateinit var viewDataBinding: VB
+    protected var viewBinding: VB? = null
+        get() = _viewBinding
+
+    private val _viewBinding: VB by lazy {
+        val type = javaClass.genericSuperclass
+        val vbClass: Class<VB> = type!!.saveAs<ParameterizedType>().actualTypeArguments[0].saveAs()
+        val method = vbClass.getDeclaredMethod("inflate", LayoutInflater::class.java)
+        method.invoke(this, layoutInflater)!!.saveAsUnChecked()
+    }
 
     protected val viewModel: VM by lazy {
         val type = javaClass.genericSuperclass
@@ -39,11 +45,7 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        viewDataBinding = DataBindingUtil.inflate(inflater, getLayoutId(), container, false)
-        return run {
-            viewDataBinding.lifecycleOwner = viewLifecycleOwner
-            viewDataBinding.root
-        }
+        return viewBinding?.root
 
     }
 
@@ -77,10 +79,11 @@ open abstract class BaseFragment<VB : ViewDataBinding, VM : BaseViewModel> : Fra
         return viewModel
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewDataBinding.unbind()
+    override fun onDestroyView() {
+        super.onDestroyView()
+
         lifecycle.removeObserver(viewModel)
+        viewBinding = null
     }
 
 

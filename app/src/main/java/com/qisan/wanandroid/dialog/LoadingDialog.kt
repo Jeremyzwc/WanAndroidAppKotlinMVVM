@@ -17,7 +17,7 @@ class LoadingDialog(context: Context) : BaseLifecycleDialog<DialogLayoutLoadingB
     override fun initData(savedInstanceState: Bundle?) {
         super.initData(savedInstanceState)
 
-        viewDataBinding.desc = desc
+        viewBinding?.tvLoading?.text = desc
     }
 
     override fun getLayoutId(): Int {
