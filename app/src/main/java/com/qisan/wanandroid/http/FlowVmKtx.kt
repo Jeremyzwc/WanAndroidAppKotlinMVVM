@@ -76,7 +76,7 @@ suspend fun <T> Flow<T>.next(block: suspend T.() -> Unit): Unit = catch { }.coll
     block(it)
 }
 
-fun <T> Flow<T>.catchError(block: Throwable.() -> Unit) = catch { cause ->
+fun <T> Flow<T>.onError(block: Throwable.() -> Unit) = catch { cause ->
     block(cause)
 }
 

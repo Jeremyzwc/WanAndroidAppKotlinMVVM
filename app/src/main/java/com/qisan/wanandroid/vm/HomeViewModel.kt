@@ -6,7 +6,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
 import com.qisan.wanandroid.base.BaseViewModel
-import com.qisan.wanandroid.entity.ArticlePagingSource
+import com.qisan.wanandroid.datasource.ArticlePagingSource
 
 /**
  * Created by qisan 2022/5/25

@@ -8,7 +8,8 @@
     android:paddingTop="@dimen/item_content_padding"
     android:paddingEnd="@dimen/item_content_padding"
     android:paddingBottom="@dimen/item_content_padding"
-    tools:ignore="RtlSymmetry">
+    tools:ignore="RtlSymmetry"
+    android:background="@color/viewBackground">
 
     <TextView
         android:id="@+id/tv_article_top"

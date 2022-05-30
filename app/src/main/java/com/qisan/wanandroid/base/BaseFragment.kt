@@ -57,6 +57,7 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
 
         initData()
 
+        initListener()
         lifecycle.addObserver(viewModel)
 
     }
@@ -66,6 +67,8 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
     }
 
     protected abstract fun initData()
+
+    open fun initListener(){}
 
     private fun initViewModel() {
         viewModel.application = requireActivity().application.saveAs()

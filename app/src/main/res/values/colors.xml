@@ -15,6 +15,8 @@
     <color name="item_date">@color/Grey600</color>
     <color name="item_title">#19191B</color>
     <color name="item_chapter">@color/Grey600</color>
+    <color name="viewBackground">@color/white</color>
+
 
     <color name="Grey50">#FAFAFA</color>
     <color name="Grey100">#F5F5F5</color>

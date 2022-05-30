@@ -53,9 +53,28 @@ class ArticleAdapter : BasePagingDataAdapter<Article, ItemArticleBinding>(
         if (item.envelopePic.isNotEmpty()) {
             holder.binding.ivArticleThumbnail.visibility = View.VISIBLE
             GlideUtils.load(context, item.envelopePic, holder.binding.ivArticleThumbnail)
-
         } else {
             holder.binding.ivArticleThumbnail.visibility = View.GONE
         }
+
+        if (item.fresh) {
+            holder.binding.tvArticleFresh.visibility = View.VISIBLE
+        } else {
+            holder.binding.tvArticleFresh.visibility = View.GONE
+        }
+
+        if (item.top == "1") {
+            holder.binding.tvArticleTop.visibility = View.VISIBLE
+        } else {
+            holder.binding.tvArticleTop.visibility = View.GONE
+        }
+
+        if (item.tags.size > 0) {
+            holder.binding.tvArticleTag.visibility = View.VISIBLE
+            holder.binding.tvArticleTag.text = item.tags[0].name
+        } else {
+            holder.binding.tvArticleTag.visibility = View.GONE
+        }
     }
+
 }

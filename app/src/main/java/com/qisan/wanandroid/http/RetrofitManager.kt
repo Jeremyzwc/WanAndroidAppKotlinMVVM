@@ -1,6 +1,6 @@
 package com.qisan.wanandroid.http
 
-import androidx.viewbinding.BuildConfig
+import com.qisan.wanandroid.BuildConfig
 import com.qisan.wanandroid.http.interceptor.HeaderInterceptor
 import com.qisan.wanandroid.http.interceptor.SaveCookieInterceptor
 import okhttp3.OkHttpClient

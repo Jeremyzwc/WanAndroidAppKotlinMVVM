@@ -19,7 +19,7 @@ abstract class BasePagingDataAdapter<T : Any,VB: ViewBinding> : PagingDataAdapte
     constructor(diffCallback: DiffUtil.ItemCallback<T>) : super(diffCallback)
 
     companion object {
-        fun <T> itemCallback(
+        fun <T : Any> itemCallback(
             areItemsTheSame: (T, T) -> Boolean = { oldItem, newItem -> oldItem == newItem },
             areContentsTheSame: (T, T) -> Boolean = { oldItem, newItem -> oldItem == newItem }
         ): DiffUtil.ItemCallback<T> {
@@ -48,6 +48,14 @@ abstract class BasePagingDataAdapter<T : Any,VB: ViewBinding> : PagingDataAdapte
 
     open fun setPagingData(lifecycle: Lifecycle, pagingData: PagingData<T>) {
         submitData(lifecycle, pagingData)
+    }
+
+
+    init {
+
+        addLoadStateListener {
+
+        }
     }
 }
 

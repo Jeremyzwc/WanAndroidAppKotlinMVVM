@@ -1,5 +1,7 @@
 package com.qisan.wanandroid.ui.fragment
 
+import android.view.View
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.qisan.wanandroid.R
@@ -35,6 +37,25 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>() {
 
         viewModel.articleLiveData.observe(this){
             mAdapter.setPagingData(lifecycle,it)
+        }
+    }
+
+
+    override fun initListener() {
+        super.initListener()
+
+        mAdapter.addLoadStateListener {
+            when (it.refresh) {
+                is LoadState.NotLoading -> {
+
+                }
+                is LoadState.Loading -> {
+
+                }
+                is LoadState.Error -> {
+
+                }
+            }
         }
     }
 
