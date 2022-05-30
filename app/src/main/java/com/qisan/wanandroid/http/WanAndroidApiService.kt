@@ -2,6 +2,7 @@ package com.qisan.wanandroid.http
 
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.entity.ArticleResponseBody
+import com.qisan.wanandroid.entity.Banner
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -22,5 +23,11 @@ interface WanAndroidApiService {
      */
     @GET("article/top/json")
     suspend fun getTopArticles(): BaseResponse<MutableList<Article>>
+
+    /**
+     * 首页banner轮播图
+     */
+    @GET("banner/json")
+    suspend fun getBanners(): BaseResponse<List<Banner>>
 
 }

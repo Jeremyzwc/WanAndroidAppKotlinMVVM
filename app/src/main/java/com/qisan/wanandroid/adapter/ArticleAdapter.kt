@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.WanApplication.Companion.context
 import com.qisan.wanandroid.base.BasePagingDataAdapter
-import com.qisan.wanandroid.base.CommonRvHolder
+import com.qisan.wanandroid.base.ViewBindingHolder
 import com.qisan.wanandroid.databinding.ItemArticleBinding
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.utils.GlideUtils
@@ -26,12 +26,12 @@ class ArticleAdapter : BasePagingDataAdapter<Article, ItemArticleBinding>(
     )
 ) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonRvHolder<ItemArticleBinding> {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<ItemArticleBinding> {
         val inflate = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CommonRvHolder(inflate)
+        return ViewBindingHolder(inflate)
     }
 
-    override fun onBindViewHolder(holder: CommonRvHolder<ItemArticleBinding>, position: Int, binding: ItemArticleBinding, item: Article) {
+    override fun onBindViewHolder(holder: ViewBindingHolder<ItemArticleBinding>, position: Int, binding: ItemArticleBinding, item: Article) {
         holder.binding.tvArticleTitle.text = item.title
         holder.binding.tvArticleAuthor.text = item.author.ifEmpty { item.shareUser }
         holder.binding.tvArticleDate.text = item.niceDate

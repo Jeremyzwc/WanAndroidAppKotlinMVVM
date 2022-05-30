@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
  * Created by QiSan 2022/5/29
  * package com.qisan.wanandroid.base
  */
-abstract class BasePagingDataAdapter<T : Any,VB: ViewBinding> : PagingDataAdapter<T, CommonRvHolder<VB>> {
+abstract class BasePagingDataAdapter<T : Any,VB: ViewBinding> : PagingDataAdapter<T, ViewBindingHolder<VB>> {
 
     constructor() : super(itemCallback())
 
@@ -35,30 +35,23 @@ abstract class BasePagingDataAdapter<T : Any,VB: ViewBinding> : PagingDataAdapte
         }
     }
 
-    override fun onBindViewHolder(holder: CommonRvHolder<VB>, position: Int) {
+    override fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int) {
 
         getItem(position)?.let { onBindViewHolder(holder, holder.bindingAdapterPosition, holder.binding, it) }
 
     }
 
-    abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommonRvHolder<VB>
+    abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<VB>
 
-    abstract fun onBindViewHolder(holder: CommonRvHolder<VB>, position: Int, binding: VB, item: T)
+    abstract fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int, binding: VB, item: T)
 
 
     open fun setPagingData(lifecycle: Lifecycle, pagingData: PagingData<T>) {
         submitData(lifecycle, pagingData)
     }
 
-
-    init {
-
-        addLoadStateListener {
-
-        }
-    }
 }
 
-open class CommonRvHolder<VB : ViewBinding>(val binding: VB) : RecyclerView.ViewHolder(binding.root) {
+open class ViewBindingHolder<VB : ViewBinding>(val binding: VB) : RecyclerView.ViewHolder(binding.root) {
 
 }

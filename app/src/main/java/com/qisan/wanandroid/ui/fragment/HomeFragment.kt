@@ -17,17 +17,17 @@ import com.qisan.wanandroid.widget.RvItemDecoration
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>() {
 
+    private var bannerView: View? = null
+
     private val mAdapter by lazy {
         ArticleAdapter()
     }
-
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
 
     override fun initData() {
-
         viewBinding?.recyclerView?.run {
             layoutManager = LinearLayoutManager(activity)
             adapter = mAdapter
@@ -35,7 +35,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>() {
             addItemDecoration(RvItemDecoration(context))
         }
 
-        viewModel.articleLiveData.observe(this){
+        viewModel.getArticleList().observe(this){
             mAdapter.setPagingData(lifecycle,it)
         }
     }
@@ -47,20 +47,20 @@ class HomeFragment : BaseFragment<FragmentHomeBinding,HomeViewModel>() {
         mAdapter.addLoadStateListener {
             when (it.refresh) {
                 is LoadState.NotLoading -> {
-
+                    viewBinding?.refreshLayout?.isRefreshing = false
                 }
                 is LoadState.Loading -> {
-
+                    viewBinding?.refreshLayout?.isRefreshing = !viewModel.isFirstLoad
                 }
                 is LoadState.Error -> {
-
+                    viewBinding?.refreshLayout?.isRefreshing = false
                 }
             }
         }
-    }
 
-    override fun showLoading() {
-        super.showLoading()
-//        viewDataBinding.isShowLoadingLayout = true
+        viewBinding?.refreshLayout?.setOnRefreshListener {
+            viewBinding?.recyclerView?.swapAdapter(mAdapter,true)
+            mAdapter.refresh()
+        }
     }
 }

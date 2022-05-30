@@ -16,7 +16,7 @@
     <color name="item_title">#19191B</color>
     <color name="item_chapter">@color/Grey600</color>
     <color name="viewBackground">@color/white</color>
-
+    <color name="color_title_bg">#CCFFFFFF</color>
 
     <color name="Grey50">#FAFAFA</color>
     <color name="Grey100">#F5F5F5</color>
@@ -28,5 +28,6 @@
     <color name="Grey700">#616161</color>
     <color name="Grey800">#424242</color>
     <color name="Grey900">#212121</color>
+
 
 </resources>

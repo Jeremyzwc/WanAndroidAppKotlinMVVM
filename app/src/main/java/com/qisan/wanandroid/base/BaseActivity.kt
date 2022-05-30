@@ -3,10 +3,15 @@ package com.qisan.wanandroid.base
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.qisan.wanandroid.R
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
@@ -103,12 +108,17 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
         }
 
         viewModel.layoutLoadingEvent.observe(this) {
-            isShowLoadingLayout = it
+            val rlLoading = viewBinding?.root?.findViewById<RelativeLayout>(R.id.rl_loading)
+            rlLoading?.visibility = if(it) View.VISIBLE else View.GONE
         }
 
         viewModel.loadErrorEvent.observe(this) {
             isShowErrorLayout = it.loadingErrorState
             errorMsg = it.loadingErrorMsg
+            val llError = viewBinding?.root?.findViewById<LinearLayout>(R.id.ll_error)
+            val tvError = viewBinding?.root?.findViewById<TextView>(R.id.tv_error)
+            llError?.visibility = if(it.loadingErrorState) View.VISIBLE else View.GONE
+            tvError?.text = it.loadingErrorMsg
         }
 
         viewModel.requestErrorEvent.observe(this) {

@@ -7,6 +7,8 @@
 
     <include layout="@layout/layout_loading" />
 
+    <include layout="@layout/layout_error"/>
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/refresh_layout"
         android:layout_width="match_parent"

@@ -57,7 +57,7 @@ dependencies {
     //适配
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
 
-    implementation 'androidx.paging:paging-runtime:3.1.1'
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //打印http请求日志
@@ -66,4 +66,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 
     implementation "com.github.bumptech.glide:glide:4.13.1"
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
+    //banner图控件
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
 }

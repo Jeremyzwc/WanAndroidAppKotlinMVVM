@@ -5,10 +5,14 @@ import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.qisan.wanandroid.R
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
@@ -117,18 +121,21 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
         }
 
         viewModel.layoutLoadingEvent.observe(viewLifecycleOwner){
-//            isShowLoadingLayout = it
+            val rlLoading = viewBinding?.root?.findViewById<RelativeLayout>(R.id.rl_loading)
+            rlLoading?.visibility = if(it) View.VISIBLE else View.GONE
         }
 
         viewModel.loadErrorEvent.observe(viewLifecycleOwner){
             isShowErrorLayout = it.loadingErrorState
             errorMsg = it.loadingErrorMsg
+            val llError = viewBinding?.root?.findViewById<LinearLayout>(R.id.ll_error)
+            val tvError = viewBinding?.root?.findViewById<TextView>(R.id.tv_error)
+            llError?.visibility = if(it.loadingErrorState) View.VISIBLE else View.GONE
+            tvError?.text = it.loadingErrorMsg
         }
 
         viewModel.requestErrorEvent.observe(viewLifecycleOwner){
             ToastUtils.show(it)
         }
     }
-
-    open fun showLoading(){}
 }
