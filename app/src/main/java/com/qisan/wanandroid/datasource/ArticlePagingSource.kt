@@ -15,7 +15,7 @@ import com.qisan.wanandroid.vm.HomeViewModel
 class ArticlePagingSource(private val commonViewModel: CommonViewModel) : BasePagingSource<Article>() {
 
     override suspend fun getPageData(page: Int): MutableList<Article> {
-        if(page == 0) commonViewModel.showLayoutLoading()
+        if(page == 0 && commonViewModel.isFirstLoad) commonViewModel.showLayoutLoading()
         val rspArticle = apiService.getArticles(page)
         val items = rspArticle.data?.datas!!
         var rspTopArticle: BaseResponse<MutableList<Article>> = BaseResponse()

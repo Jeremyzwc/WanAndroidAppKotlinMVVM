@@ -41,6 +41,7 @@ abstract class BasePagingDataAdapter<T : Any,VB: ViewBinding> : PagingDataAdapte
 
     }
 
+
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<VB>
 
     abstract fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int, binding: VB, item: T)

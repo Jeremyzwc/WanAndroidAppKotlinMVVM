@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.fragment
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
@@ -15,7 +16,9 @@ import com.qisan.wanandroid.adapter.WrapRecyclerAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentHomeBinding
 import com.qisan.wanandroid.databinding.ItemHomeBannerBinding
+import com.qisan.wanandroid.entity.Banner
 import com.qisan.wanandroid.utils.GlideUtils
+import com.qisan.wanandroid.utils.saveAs
 import com.qisan.wanandroid.vm.HomeViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 import kotlinx.coroutines.delay
@@ -27,12 +30,16 @@ import kotlinx.coroutines.launch
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
-    private var bannerView: View? = null
+
     private var bannerBinding: ItemHomeBannerBinding? = null
 
     private val wrapRecyclerAdapter by lazy { WrapRecyclerAdapter(mAdapter) }
 
+    private var bannerDatas: List<Banner>? = ArrayList()
+
+
     private val mAdapter by lazy {
+
         ArticleAdapter()
     }
 
@@ -48,6 +55,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     @SuppressLint("InflateParams")
     override fun initData() {
+        Log.e("HomeFragment","initData")
+
+        viewModel.getBanner()
 
         //初始化bannerView
         bannerBinding = ItemHomeBannerBinding.inflate(layoutInflater)
@@ -66,31 +76,14 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initListener() {
         super.initListener()
-
+        Log.e("HomeFragment","initListener")
         viewModel.bannerLiveData.observe(this) {
-            val bannerFeedList = ArrayList<String>()
-            val bannerTitleList = ArrayList<String>()
-            it?.forEach { banner ->
-                bannerFeedList.add(banner.imagePath)
-                bannerTitleList.add(banner.title)
-            }
-
-            bannerBinding?.banner?.run {
-                setAutoPlayAble(bannerFeedList.size > 1)
-                setData(bannerFeedList, bannerTitleList)
-                setAdapter(bannerAdapter)
-            }
-            lifecycleScope.launch {
-                delay(150)
-                viewModel.hideLayoutLoading()
-                wrapRecyclerAdapter.addHeaderView(bannerBinding?.root)
-
-            }
+            bannerDatas = it?.saveAs<ArrayList<Banner>>()
+            setBanner(it)
         }
 
         viewModel.getArticleList().observe(this) {
             mAdapter.setPagingData(lifecycle, it)
-            viewModel.getBanner()
         }
 
         mAdapter.addLoadStateListener {
@@ -107,8 +100,12 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             }
         }
 
+        mAdapter.addOnPagesUpdatedListener {
+            viewBinding?.recyclerView?.visibility = View.VISIBLE
+        }
+
+        //列表刷新
         viewBinding?.refreshLayout?.setOnRefreshListener {
-            viewModel.getBanner()
             viewBinding?.recyclerView?.swapAdapter(wrapRecyclerAdapter, true)
             mAdapter.refresh()
         }
@@ -116,9 +113,30 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
 
     private val bannerDelegate = BGABanner.Delegate<ImageView, String> { banner, imageView, model, position ->
-//        if (bannerDatas.size > 0) {
-//            val data = bannerDatas[position]
+        if (bannerDatas?.isNotEmpty() == true) {
+            val data = bannerDatas?.get(position)
 //            ContentActivity.start(activity, data.id, data.title, data.url)
-//        }
+        }
+    }
+
+    /**
+     * 设置顶部banner
+     */
+    private fun setBanner(list: List<Banner>?){
+        val bannerFeedList = ArrayList<String>()
+        val bannerTitleList = ArrayList<String>()
+        list?.forEach { banner ->
+            bannerFeedList.add(banner.imagePath)
+            bannerTitleList.add(banner.title)
+        }
+
+        bannerBinding?.banner?.run {
+            setAutoPlayAble(bannerFeedList.size > 1)
+            setData(bannerFeedList, bannerTitleList)
+            setAdapter(bannerAdapter)
+        }
+
+        viewModel.hideLayoutLoading()
+        wrapRecyclerAdapter.addHeaderView(bannerBinding?.root)
     }
 }
