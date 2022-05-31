@@ -31,7 +31,9 @@ suspend fun <T> BaseViewModel.launchFlow(showLayoutLoading: Boolean = true, requ
         emit(response)
     }.flowOn(Dispatchers.IO)
         .onCompletion { throwable ->
-            hideLayoutLoading()
+            if(showLayoutLoading){
+                hideLayoutLoading()
+            }
             throwable?.let { throw catchException(this@launchFlow, throwable) }
         }
 }
@@ -49,7 +51,9 @@ suspend fun <T> BaseViewModel.paostFlow(showDialogLoading: Boolean = true, loadi
         emit(response)
     }.flowOn(Dispatchers.IO)
         .onCompletion { throwable ->
-            cloaseDialogLoading(DialogLoadingEvent("", false))
+            if (showDialogLoading) {
+                cloaseDialogLoading(DialogLoadingEvent("", false))
+            }
             throwable?.let { throw catchException(this@paostFlow, throwable) }
         }
 }

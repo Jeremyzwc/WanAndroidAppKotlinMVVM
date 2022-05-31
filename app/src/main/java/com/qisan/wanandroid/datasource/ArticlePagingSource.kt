@@ -28,8 +28,6 @@ class ArticlePagingSource(private val commonViewModel: CommonViewModel) : BasePa
             }
             items.addAll(0, it)
         }
-
-        commonViewModel.hideLayoutLoading()
         commonViewModel.isFirstLoad = false
         return items
     }
