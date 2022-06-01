@@ -1,5 +1,8 @@
 package com.qisan.wanandroid.base
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -11,11 +14,10 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.afollestad.materialdialogs.color.CircleView
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.dialog.LoadingDialog
-import com.qisan.wanandroid.utils.ToastUtils
-import com.qisan.wanandroid.utils.saveAs
-import com.qisan.wanandroid.utils.saveAsUnChecked
+import com.qisan.wanandroid.utils.*
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -45,6 +47,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
     protected var isShowLoadingLayout = false
     protected var isShowErrorLayout = false
     protected lateinit var errorMsg: String
+
+    protected var mThemeColor: Int = SettingUtil.getColor()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -123,6 +127,24 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
 
         viewModel.requestErrorEvent.observe(this) {
             ToastUtils.show(it)
+        }
+    }
+
+    open fun initColor() {
+        mThemeColor = if (!SettingUtil.getIsNightMode()) {
+            SettingUtil.getColor()
+        } else {
+            resources.getColor(R.color.colorPrimary)
+        }
+        StatusBarUtil.setColor(this, mThemeColor, 0)
+        if (this.supportActionBar != null) {
+            this.supportActionBar?.setBackgroundDrawable(ColorDrawable(mThemeColor))
+        }
+
+        if (SettingUtil.getNavBar()) {
+            window.navigationBarColor = CircleView.shiftColorDown(mThemeColor)
+        } else {
+            window.navigationBarColor = Color.BLACK
         }
     }
 }

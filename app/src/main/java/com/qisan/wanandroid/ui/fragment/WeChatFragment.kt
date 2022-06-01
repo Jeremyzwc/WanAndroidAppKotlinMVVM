@@ -1,5 +1,6 @@
 package com.qisan.wanandroid.ui.fragment
 
+import android.util.Log
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentHomeBinding
@@ -18,7 +19,7 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
     }
 
     override fun initData() {
-
+        Log.e("WeChatFragment","initData")
     }
 
 }

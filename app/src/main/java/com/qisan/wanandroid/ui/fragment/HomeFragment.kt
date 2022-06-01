@@ -29,14 +29,11 @@ import kotlinx.coroutines.launch
  * com.qisan.wanandroid.ui.fragment
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
-
-
     private var bannerBinding: ItemHomeBannerBinding? = null
 
     private val wrapRecyclerAdapter by lazy { WrapRecyclerAdapter(mAdapter) }
 
     private var bannerDatas: List<Banner>? = ArrayList()
-
 
     private val mAdapter by lazy {
 
@@ -55,7 +52,6 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     @SuppressLint("InflateParams")
     override fun initData() {
-        Log.e("HomeFragment","initData")
 
         viewModel.getBanner()
 
@@ -76,7 +72,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
 
     override fun initListener() {
         super.initListener()
-        Log.e("HomeFragment","initListener")
+
         viewModel.bannerLiveData.observe(this) {
             bannerDatas = it?.saveAs<ArrayList<Banner>>()
             setBanner(it)

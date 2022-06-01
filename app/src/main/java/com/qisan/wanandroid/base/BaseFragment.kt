@@ -12,6 +12,7 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.slider.BaseOnChangeListener
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.ToastUtils
@@ -46,9 +47,17 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
     protected var isShowLoadingLayout = false
     protected var isShowErrorLayout = false
     protected lateinit var errorMsg : String
+    /**
+     * 是否初始化过布局
+     */
+    protected var isPrepared: Boolean = false
+    /**
+     * 是否加载过数据
+     */
+    protected var isDataInitiated: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
+        isPrepared = true
         return viewBinding?.root
 
     }
@@ -56,18 +65,23 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViewModel()
-        initCommObserver()
-
-        initData()
-
-        initListener()
-        lifecycle.addObserver(viewModel)
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if(!isDataInitiated && !isHidden && isPrepared){
+            initViewModel()
+            initCommObserver()
+            initData()
+            initListener()
+            lifecycle.addObserver(viewModel)
+            isDataInitiated = true
+        }
     }
 
     protected abstract fun initData()
@@ -91,6 +105,8 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
 
         lifecycle.removeObserver(viewModel)
         viewBinding = null
+        isDataInitiated = false
+        isPrepared = false
     }
 
 

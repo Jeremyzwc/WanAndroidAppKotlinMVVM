@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include layout="@layout/toolbar" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -20,7 +22,8 @@
             android:layout_height="match_parent"
             app:defaultNavHost="true"
             app:navGraph="@navigation/main_navigation"
-            tools:layout_editor_absoluteX="0dp" />
+            tools:layout_editor_absoluteX="0dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/tab_navi"
@@ -28,7 +31,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/menu_tab" />
+            app:menu="@menu/menu_tab"
+            app:layout_behavior=".widget.behavior.BottomNavigationBehavior"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

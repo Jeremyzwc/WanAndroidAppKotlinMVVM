@@ -70,4 +70,5 @@ dependencies {
     //banner图控件
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.4.4'
 }
