@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 class HomeViewModel : CommonViewModel() {
 
 //    val articleLiveData = MutableLiveData<ArticleResponseBody?>()
-    val bannerLiveData = MutableLiveData<List<Banner>?>()
+    val bannerLiveData = MutableLiveData<MutableList<Banner>?>()
     /**
      * 获取首页列表
      */

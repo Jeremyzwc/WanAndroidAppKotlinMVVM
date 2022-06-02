@@ -5,8 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.WanApplication.Companion.context
-import com.qisan.wanandroid.base.BasePagingDataAdapter
-import com.qisan.wanandroid.base.ViewBindingHolder
+import com.qisan.wanandroid.adapter.ViewBindingHolder
 import com.qisan.wanandroid.databinding.ItemArticleBinding
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.utils.GlideUtils

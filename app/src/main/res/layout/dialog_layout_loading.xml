@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@{desc}"
-            android:textColor="@color/purple_500"
+            android:textColor="@color/colorPrimaryVariant"
             android:textSize="16sp"
             tools:ignore="HardcodedText" />
     </LinearLayout>

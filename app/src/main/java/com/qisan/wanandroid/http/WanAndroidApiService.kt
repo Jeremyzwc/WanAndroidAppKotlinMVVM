@@ -28,6 +28,6 @@ interface WanAndroidApiService {
      * 首页banner轮播图
      */
     @GET("banner/json")
-    suspend fun getBanners(): BaseResponse<List<Banner>>
+    suspend fun getBanners(): BaseResponse<MutableList<Banner>>
 
 }

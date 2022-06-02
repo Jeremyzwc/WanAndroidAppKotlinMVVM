@@ -28,12 +28,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun initData() {
 
+        viewBinding?.toolbarLayout?.toolbar.run {
+            title = getString(R.string.app_name)
+            setSupportActionBar(this)
+        }
+
         val navHost: NavHostFragment? = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment)?.saveAs<NavHostFragment>()
         val navController = navHost?.navController
         val bottomNaviView = viewBinding?.tabNavi
         navController?.let { bottomNaviView?.setupWithNavController(it) }
 
+        initLazyFragment()
+    }
+
+    //让Fragment可以懒加载实现
+    private fun initLazyFragment(){
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "action_home").commit()
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, squareFragment, "action_square").setMaxLifecycle(squareFragment, Lifecycle.State.STARTED).hide(squareFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, weChatFragment, "action_wechat").setMaxLifecycle(weChatFragment, Lifecycle.State.STARTED).hide(weChatFragment).commit()

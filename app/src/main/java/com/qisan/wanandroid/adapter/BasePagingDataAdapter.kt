@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.base
+package com.qisan.wanandroid.adapter
 
 import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle

@@ -2,7 +2,6 @@ package com.qisan.wanandroid.base
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
@@ -14,7 +13,6 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
-import com.afollestad.materialdialogs.color.CircleView
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.*
@@ -142,7 +140,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
         }
 
         if (SettingUtil.getNavBar()) {
-            window.navigationBarColor = CircleView.shiftColorDown(mThemeColor)
+            window.navigationBarColor = mThemeColor
         } else {
             window.navigationBarColor = Color.BLACK
         }
