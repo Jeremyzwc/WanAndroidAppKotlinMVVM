@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <group android:id="@+id/other">
+
+        <item
+            android:id="@+id/nav_score"
+            android:icon="@drawable/ic_score_white_24dp"
+            android:title="@string/nav_my_score"
+            app:actionViewClass="android.widget.TextView" />
+
+        <item
+            android:id="@+id/nav_collect"
+            android:icon="@drawable/ic_like_not"
+            android:title="@string/nav_my_collect" />
+
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/ic_share_white_24dp"
+            android:title="@string/my_share" />
+
+        <item
+            android:id="@+id/nav_todo"
+            android:icon="@drawable/ic_todo_default_24dp"
+            android:title="@string/nav_todo" />
+
+        <item
+            android:id="@+id/nav_night_mode"
+            android:icon="@drawable/ic_night_24dp"
+            android:title="@string/nav_night_mode" />
+
+        <item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_setting_24dp"
+            android:title="@string/nav_setting" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout_white_24dp"
+            android:title="@string/nav_logout" />
+
+    </group>
+
+</menu>

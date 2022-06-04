@@ -178,4 +178,6 @@
     <string name="audited">待审核</string>
     <string name="submit_ing">正在提交...</string>
 
+    <string name="nav_line_4" translatable="false">----</string>
+    <string name="nav_line_2" translatable="false">--</string>
 </resources>

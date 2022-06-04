@@ -154,4 +154,8 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
             ToastUtils.show(it)
         }
     }
+
+    open fun scrollToTop(){
+
+    }
 }

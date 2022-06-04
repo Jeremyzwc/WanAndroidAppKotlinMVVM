@@ -33,6 +33,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         articleAdapter.withLoadStateFooter(FooterAdapter())
     }
 
+    private val linearLayoutManager: LinearLayoutManager by lazy {
+        LinearLayoutManager(activity)
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_home
     }
@@ -43,7 +47,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         viewModel.getBanner()
 
         viewBinding?.recyclerView?.run {
-            layoutManager = LinearLayoutManager(activity)
+            layoutManager = linearLayoutManager
             wrapRecyclerAdapter.addAdapter(0,homeBannerAdapter)
             adapter = wrapRecyclerAdapter
             itemAnimator = DefaultItemAnimator()
@@ -93,5 +97,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     private fun setBanner(list: MutableList<Banner>?){
         viewModel.hideLayoutLoading()
         homeBannerAdapter.mDatas = mutableListOf(list)
+    }
+
+    override fun scrollToTop() {
+        super.scrollToTop()
+
+        viewBinding?.recyclerView?.run {
+            if (linearLayoutManager.findFirstVisibleItemPosition() > 20) {
+                scrollToPosition(0)
+            } else {
+                smoothScrollToPosition(0)
+            }
+        }
     }
 }

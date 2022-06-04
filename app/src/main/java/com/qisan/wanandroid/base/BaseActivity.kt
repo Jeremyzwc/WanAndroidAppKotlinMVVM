@@ -63,9 +63,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
 
     protected abstract fun initData()
 
-    //事件监听处理，非必须
-    protected fun initListener() {}
-
+    open fun initListener() {}
 
     private fun initViewModel() {
         viewModel.application = application.saveAs()

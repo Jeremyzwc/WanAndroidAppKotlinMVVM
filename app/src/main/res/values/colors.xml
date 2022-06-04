@@ -33,4 +33,6 @@
     <color name="list_divider">@color/Grey400</color>
     <color name="transparent">#00000000</color>
 
+    <color name="item_tag_tv">#ffFFFFFF</color>
+    <color name="item_nav_color_tv">#19191B</color>
 </resources>
