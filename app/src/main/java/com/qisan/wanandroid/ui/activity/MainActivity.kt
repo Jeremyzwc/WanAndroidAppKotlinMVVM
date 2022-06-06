@@ -1,6 +1,5 @@
 package com.qisan.wanandroid.ui.activity
 
-import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -64,7 +63,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    //让Fragment可以懒加载实现
+    //通过setMaxLifecycle让Fragment可以懒加载实现
     private fun initLazyFragment() {
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "action_home").commit()
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, squareFragment, "action_square").setMaxLifecycle(squareFragment, Lifecycle.State.STARTED).hide(squareFragment).commit()
@@ -146,7 +145,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-
+    //toolbar上的搜索
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         if (mIndex != FRAGMENT_SQUARE) {
             menuInflater.inflate(R.menu.menu_main_search, menu)
