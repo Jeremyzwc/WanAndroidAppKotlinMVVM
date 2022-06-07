@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewbinding.ViewBinding
 import com.qisan.wanandroid.R
+import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.dialog.LoadingDialog
 import com.qisan.wanandroid.utils.*
 import java.lang.reflect.ParameterizedType
@@ -45,6 +46,7 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
     protected var isShowLoadingLayout = false
     protected var isShowErrorLayout = false
     protected lateinit var errorMsg: String
+    protected var isLogin: Boolean by SharePreferenceUtils(Constant.LOGIN_KEY, false)
 
     protected var mThemeColor: Int = SettingUtil.getColor()
 

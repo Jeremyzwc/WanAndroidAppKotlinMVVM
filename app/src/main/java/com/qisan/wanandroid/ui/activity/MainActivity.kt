@@ -1,16 +1,24 @@
 package com.qisan.wanandroid.ui.activity
 
+import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.navigation.NavigationView
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseActivity
+import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.databinding.ActivityMainBinding
+import com.qisan.wanandroid.databinding.NavHeaderMainBinding
 import com.qisan.wanandroid.ui.fragment.*
+import com.qisan.wanandroid.utils.SettingUtil
+import com.qisan.wanandroid.utils.SharePreferenceUtils
+import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
 import com.qisan.wanandroid.vm.MainViewModel
 
@@ -33,11 +41,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private var activeFragment: Fragment = homeFragment
 
+    private var navHeaderMainBinding: NavHeaderMainBinding? = null
+
     override fun getLayoutId(): Int {
         return R.layout.activity_main
     }
 
     override fun initData() {
+
+        navHeaderMainBinding = NavHeaderMainBinding.inflate(layoutInflater)
 
         viewBinding?.toolbarLayout?.toolbar.run {
             title = getString(R.string.app_name)
@@ -45,6 +57,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
 
         initDrawerLayout()
+
+        initMainNav()
 
         val navHost: NavHostFragment? = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment)?.saveAs<NavHostFragment>()
@@ -111,7 +125,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         activeFragment = fragment
     }
 
-    private fun fabClickInto(){
+    private fun initMainNav() {
+        viewBinding?.navView?.run {
+            setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)
+        }
+    }
+
+    private fun fabClickInto() {
         when (mIndex) {
             FRAGMENT_HOME -> {
                 homeFragment.scrollToTop()
@@ -132,7 +152,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     //添加tool菜单侧滑按钮已经打开关闭监听
-    private fun initDrawerLayout(){
+    private fun initDrawerLayout() {
         viewBinding?.drawerLayout?.run {
             val toggle = ActionBarDrawerToggle(
                 this@MainActivity,
@@ -163,5 +183,81 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private val drawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.nav_score -> {
+                if (isLogin) {
+//                    Intent(this@MainActivity, ScoreActivity::class.java).run {
+//                        startActivity(this)
+//                    }
+                } else {
+                    ToastUtils.show(resources.getString(R.string.login_tint))
+//                    goLogin()
+                }
+            }
+            R.id.nav_collect -> {
+                if (isLogin) {
+//                    goCommonActivity(Constant.Type.COLLECT_TYPE_KEY)
+                } else {
+                    ToastUtils.show(resources.getString(R.string.login_tint))
+//                    goLogin()
+                }
+            }
+            R.id.nav_share -> {
+                if (isLogin) {
+//                    startActivity(Intent(this, ShareActivity::class.java))
+                } else {
+                    ToastUtils.show(resources.getString(R.string.login_tint))
+//                    goLogin()
+                }
+            }
+            R.id.nav_setting -> {
+//                Intent(this@MainActivity, SettingActivity::class.java).run {
+//                    startActivity(this)
+//                }
+            }
+            R.id.nav_logout -> {
+//                logout()
+            }
+            R.id.nav_night_mode -> {
+                if (SettingUtil.getIsNightMode()) {
+                    SettingUtil.setIsNightMode(false)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                } else {
+                    SettingUtil.setIsNightMode(true)
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                }
+                window.setWindowAnimations(R.style.WindowAnimationFadeInOut)
+                recreate()
+            }
+            R.id.nav_todo -> {
+                if (isLogin) {
+//                    Intent(this@MainActivity, TodoActivity::class.java).run {
+//                        startActivity(this)
+//                    }
+                } else {
+                    ToastUtils.show(resources.getString(R.string.login_tint))
+//                    goLogin()
+                }
+            }
+        }
+        true
+    }
+
+    override fun recreate() {
+        try {
+            val fragmentTransaction = supportFragmentManager.beginTransaction()
+            fragmentTransaction.remove(homeFragment)
+            fragmentTransaction.remove(squareFragment)
+            fragmentTransaction.remove(systemFragment)
+            fragmentTransaction.remove(projectFragment)
+            fragmentTransaction.remove(weChatFragment)
+            fragmentTransaction.commitAllowingStateLoss()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        super.recreate()
     }
 }
