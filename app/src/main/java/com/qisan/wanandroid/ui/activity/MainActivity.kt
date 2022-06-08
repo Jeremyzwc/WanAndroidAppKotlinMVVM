@@ -90,26 +90,31 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 R.id.action_home -> {
                     showFragment(homeFragment)
                     mIndex = FRAGMENT_HOME
+                    viewBinding?.toolbarLayout?.toolbar?.title = getString(R.string.home)
                 }
 
                 R.id.action_square -> {
                     showFragment(squareFragment)
                     mIndex = FRAGMENT_SQUARE
+                    viewBinding?.toolbarLayout?.toolbar?.title = getString(R.string.square)
                 }
 
                 R.id.action_wechat -> {
                     showFragment(weChatFragment)
                     mIndex = FRAGMENT_WECHAT
+                    viewBinding?.toolbarLayout?.toolbar?.title = getString(R.string.wechat)
                 }
 
                 R.id.action_system -> {
                     showFragment(systemFragment)
                     mIndex = FRAGMENT_SYSTEM
+                    viewBinding?.toolbarLayout?.toolbar?.title = getString(R.string.knowledge_system)
                 }
 
                 R.id.action_project -> {
                     showFragment(projectFragment)
                     mIndex = FRAGMENT_PROJECT
+                    viewBinding?.toolbarLayout?.toolbar?.title = getString(R.string.project)
                 }
             }
             return@setOnItemSelectedListener true

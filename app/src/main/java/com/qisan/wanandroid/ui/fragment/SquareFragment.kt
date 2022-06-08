@@ -1,5 +1,9 @@
 package com.qisan.wanandroid.ui.fragment
 
+import android.content.Intent
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentSquareBinding
@@ -15,5 +19,23 @@ class SquareFragment : BaseFragment<FragmentSquareBinding, SquareViewModel>() {
     }
 
     override fun initData() {
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_share, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_add -> {
+//                Intent(activity, CommonActivity::class.java).run {
+//                    putExtra(Constant.TYPE_KEY, Constant.Type.SHARE_ARTICLE_TYPE_KEY)
+//                    startActivity(this)
+//                }
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
