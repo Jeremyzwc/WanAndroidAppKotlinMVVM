@@ -39,6 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private var mIndex = FRAGMENT_HOME
 
+    //当前展示的fragment
     private var activeFragment: Fragment = homeFragment
 
     private var navHeaderMainBinding: NavHeaderMainBinding? = null

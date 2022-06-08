@@ -14,7 +14,8 @@
         android:layout_height="?attr/actionBarSize"
         app:layout_scrollFlags="scroll|enterAlways"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        app:titleTextAppearance="@style/Toolbar.TitleText">
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        android:background="@color/colorPrimary">
 
         <TextView
             android:id="@+id/tv_title"
