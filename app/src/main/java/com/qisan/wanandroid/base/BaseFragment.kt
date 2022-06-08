@@ -58,9 +58,11 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         isPrepared = true
+        initMenu()
         return viewBinding?.root
-
     }
+
+    open fun initMenu(){}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

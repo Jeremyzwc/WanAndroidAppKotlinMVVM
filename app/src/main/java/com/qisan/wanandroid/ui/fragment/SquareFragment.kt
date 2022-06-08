@@ -19,7 +19,12 @@ class SquareFragment : BaseFragment<FragmentSquareBinding, SquareViewModel>() {
     }
 
     override fun initData() {
+
+    }
+
+    override fun initMenu() {
         setHasOptionsMenu(true)
+        super.initMenu()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
