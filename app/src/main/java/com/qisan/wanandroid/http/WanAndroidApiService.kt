@@ -7,6 +7,8 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
+ * 接口
+ *
  * Created by qisan 2022/5/26
  * com.qisan.wanandroid.http
  */
@@ -29,5 +31,12 @@ interface WanAndroidApiService {
      */
     @GET("banner/json")
     suspend fun getBanners(): BaseResponse<MutableList<Banner>>
+
+    /**
+     * 获取广场文章列表
+     */
+    @GET("user_article/list/{page}/json")
+    suspend fun getSquareList(@Path("page") page: Int): BaseResponse<ArticleResponseBody>
+
 
 }
