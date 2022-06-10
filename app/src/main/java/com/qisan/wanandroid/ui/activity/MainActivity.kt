@@ -126,7 +126,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             hide(activeFragment)
             setMaxLifecycle(activeFragment, Lifecycle.State.STARTED)
             show(fragment)
-            setMaxLifecycle(projectFragment, Lifecycle.State.RESUMED)
+            setMaxLifecycle(fragment, Lifecycle.State.RESUMED)
         }.commit()
         activeFragment = fragment
     }

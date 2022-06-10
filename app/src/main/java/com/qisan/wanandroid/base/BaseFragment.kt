@@ -76,12 +76,13 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
 
     override fun onResume() {
         super.onResume()
-        if(!isDataInitiated && !isHidden && isPrepared){
+        if(!isDataInitiated && isPrepared){
             initViewModel()
+            lifecycle.addObserver(viewModel)
             initCommObserver()
             initData()
             initListener()
-            lifecycle.addObserver(viewModel)
+
             isDataInitiated = true
         }
     }

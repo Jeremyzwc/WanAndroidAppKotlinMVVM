@@ -19,7 +19,8 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
     }
 
     override fun initData() {
-        Log.e("WeChatFragment","initData")
+
     }
+
 
 }
