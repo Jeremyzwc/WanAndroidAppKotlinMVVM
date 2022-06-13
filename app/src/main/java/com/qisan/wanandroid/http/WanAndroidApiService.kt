@@ -44,4 +44,10 @@ interface WanAndroidApiService {
      */
     @GET("/wxarticle/chapters/json")
     suspend fun getWXChapters(): BaseResponse<MutableList<WXChapterBean>>
+
+    /**
+     * 公众号对应列表
+     */
+    @GET("/wxarticle/list/{id}/{page}/json")
+    suspend fun getWxArticles(@Path("id") id: Int, @Path("page") page: Int): BaseResponse<ArticleResponseBody>
 }

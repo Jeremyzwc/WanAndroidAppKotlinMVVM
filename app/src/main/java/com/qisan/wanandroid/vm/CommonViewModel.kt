@@ -8,4 +8,7 @@ import com.qisan.wanandroid.base.BaseViewModel
  */
 open class CommonViewModel: BaseViewModel() {
     var isFirstLoad = true
+
+    //公众号id
+    var wxChatId: Int = 0
 }

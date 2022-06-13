@@ -7,6 +7,7 @@ import com.qisan.wanandroid.R
 import com.qisan.wanandroid.adapter.WxChatPageAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentWechatBinding
+import com.qisan.wanandroid.utils.saveAs
 import com.qisan.wanandroid.vm.WeChatViewModel
 
 /**
@@ -16,6 +17,8 @@ import com.qisan.wanandroid.vm.WeChatViewModel
 class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
 
     private val fragments: MutableList<Fragment> = mutableListOf()
+
+    private var wxChatPageAdapter: WxChatPageAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_wechat
@@ -33,14 +36,16 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
         viewModel.wxChapterLiveData.observe(this){
             val tabList: MutableList<String> = mutableListOf()
             it?.forEach { item ->
-               fragments.add(OfficialAccountFragment.newInstance(item.id))
+               fragments.add(WxChatChildFragment.newInstance(item.id))
                 tabList.add(item.name)
             }
 
-            val wxChatPageAdapter = WxChatPageAdapter(childFragmentManager,
+            wxChatPageAdapter = WxChatPageAdapter(childFragmentManager,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments,tabList)
             viewBinding?.viewPager?.adapter = wxChatPageAdapter
             viewBinding?.tabLayout?.setupWithViewPager(viewBinding?.viewPager)
+
+            viewModel.hideLayoutLoading()
 
         }
 
@@ -67,5 +72,15 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
                 viewBinding?.viewPager?.setCurrentItem(it.position, false)
             }
         }
+    }
+
+    override fun scrollToTop() {
+        super.scrollToTop()
+
+        if (wxChatPageAdapter?.count == 0) {
+            return
+        }
+        val fragment: WxChatChildFragment = viewBinding?.viewPager?.currentItem?.let { wxChatPageAdapter?.getItem(it)?.saveAs<WxChatChildFragment>() }!!
+        fragment.scrollToTop()
     }
 }

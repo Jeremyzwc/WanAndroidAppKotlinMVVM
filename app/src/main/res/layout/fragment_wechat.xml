@@ -6,23 +6,29 @@
     android:background="@color/bg_theme"
     android:fitsSystemWindows="true">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        style="@style/CustomTabLayoutStyle"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:tabGravity="center"
-        app:tabMode="scrollable" />
+    <include layout="@layout/layout_loading" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/view_pager"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        android:orientation="vertical">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            style="@style/CustomTabLayoutStyle"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            app:tabGravity="center"
+            app:tabMode="scrollable" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </LinearLayout>
 
 
-    <include
-        android:id="@+id/layout_loading"
-        layout="@layout/layout_loading"/>
 </FrameLayout>
 
 
