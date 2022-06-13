@@ -3,6 +3,7 @@ package com.qisan.wanandroid.http
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.entity.ArticleResponseBody
 import com.qisan.wanandroid.entity.Banner
+import com.qisan.wanandroid.entity.WXChapterBean
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -38,5 +39,9 @@ interface WanAndroidApiService {
     @GET("user_article/list/{page}/json")
     suspend fun getSquareList(@Path("page") page: Int): BaseResponse<ArticleResponseBody>
 
-
+    /**
+     * 获取公众号列表
+     */
+    @GET("/wxarticle/chapters/json")
+    suspend fun getWXChapters(): BaseResponse<MutableList<WXChapterBean>>
 }

@@ -1,11 +1,12 @@
 package com.qisan.wanandroid.ui.fragment
 
-import android.util.Log
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
+import com.google.android.material.tabs.TabLayout
 import com.qisan.wanandroid.R
+import com.qisan.wanandroid.adapter.WxChatPageAdapter
 import com.qisan.wanandroid.base.BaseFragment
-import com.qisan.wanandroid.databinding.FragmentHomeBinding
 import com.qisan.wanandroid.databinding.FragmentWechatBinding
-import com.qisan.wanandroid.vm.HomeViewModel
 import com.qisan.wanandroid.vm.WeChatViewModel
 
 /**
@@ -14,13 +15,57 @@ import com.qisan.wanandroid.vm.WeChatViewModel
  */
 class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
 
+    private val fragments: MutableList<Fragment> = mutableListOf()
+
     override fun getLayoutId(): Int {
         return R.layout.fragment_wechat
     }
 
     override fun initData() {
 
+        viewModel.getWxChapter()
+
+    }
+
+    override fun initListener() {
+        super.initListener()
+
+        viewModel.wxChapterLiveData.observe(this){
+            val tabList: MutableList<String> = mutableListOf()
+            it?.forEach { item ->
+               fragments.add(OfficialAccountFragment.newInstance(item.id))
+                tabList.add(item.name)
+            }
+
+            val wxChatPageAdapter = WxChatPageAdapter(childFragmentManager,
+                FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments,tabList)
+            viewBinding?.viewPager?.adapter = wxChatPageAdapter
+            viewBinding?.tabLayout?.setupWithViewPager(viewBinding?.viewPager)
+
+        }
+
+        viewBinding?.tabLayout?.run {
+            addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(viewBinding?.viewPager))
+            addOnTabSelectedListener(onTabSelectedListener)
+        }
+
+        viewBinding?.viewPager?.run {
+            addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(viewBinding?.tabLayout))
+        }
     }
 
 
+    private val onTabSelectedListener = object : TabLayout.OnTabSelectedListener {
+        override fun onTabReselected(tab: TabLayout.Tab?) {
+        }
+
+        override fun onTabUnselected(tab: TabLayout.Tab?) {
+        }
+
+        override fun onTabSelected(tab: TabLayout.Tab?) {
+            tab?.let {
+                viewBinding?.viewPager?.setCurrentItem(it.position, false)
+            }
+        }
+    }
 }

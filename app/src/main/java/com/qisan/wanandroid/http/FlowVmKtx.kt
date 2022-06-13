@@ -38,7 +38,7 @@ suspend fun <T> BaseViewModel.launchFlow(showLayoutLoading: Boolean = true, requ
         }
 }
 
-suspend fun <T> BaseViewModel.paostFlow(showDialogLoading: Boolean = true, loadingStr: String = "加载中...", request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
+suspend fun <T> BaseViewModel.postFlow(showDialogLoading: Boolean = true, loadingStr: String = "加载中...", request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
 
     if (showDialogLoading) {
         showDialogLoading(DialogLoadingEvent(loadingStr, true))
@@ -54,7 +54,7 @@ suspend fun <T> BaseViewModel.paostFlow(showDialogLoading: Boolean = true, loadi
             if (showDialogLoading) {
                 cloaseDialogLoading(DialogLoadingEvent("", false))
             }
-            throwable?.let { throw catchException(this@paostFlow, throwable) }
+            throwable?.let { throw catchException(this@postFlow, throwable) }
         }
 }
 
