@@ -67,7 +67,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         val bottomNaviView = viewBinding?.tabNavi
         navController?.let { bottomNaviView?.setupWithNavController(it) }
 
-        initLazyFragment()
+        initFragmentAdd()
     }
 
     override fun initListener() {
@@ -78,13 +78,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-    //通过setMaxLifecycle让Fragment可以懒加载实现
-    private fun initLazyFragment() {
-        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "action_home").commit()
-        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, squareFragment, "action_square").setMaxLifecycle(squareFragment, Lifecycle.State.STARTED).hide(squareFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, weChatFragment, "action_wechat").setMaxLifecycle(weChatFragment, Lifecycle.State.STARTED).hide(weChatFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, systemFragment, "action_system").setMaxLifecycle(systemFragment, Lifecycle.State.STARTED).hide(systemFragment).commit()
-        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, projectFragment, "action_project").setMaxLifecycle(projectFragment, Lifecycle.State.STARTED).hide(projectFragment).commit()
+    private fun initFragmentAdd() {
+
+        initLazyFragment()
+
         viewBinding?.tabNavi?.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.action_home -> {
@@ -119,6 +116,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
             return@setOnItemSelectedListener true
         }
+    }
+
+
+    //通过setMaxLifecycle让Fragment可以懒加载实现
+    private fun initLazyFragment(){
+        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "action_home").commit()
+        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, squareFragment, "action_square").setMaxLifecycle(squareFragment, Lifecycle.State.STARTED).hide(squareFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, weChatFragment, "action_wechat").setMaxLifecycle(weChatFragment, Lifecycle.State.STARTED).hide(weChatFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, systemFragment, "action_system").setMaxLifecycle(systemFragment, Lifecycle.State.STARTED).hide(systemFragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, projectFragment, "action_project").setMaxLifecycle(projectFragment, Lifecycle.State.STARTED).hide(projectFragment).commit()
     }
 
     private fun showFragment(fragment: Fragment) {

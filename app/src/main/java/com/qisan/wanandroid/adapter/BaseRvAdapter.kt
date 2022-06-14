@@ -14,7 +14,6 @@ abstract class BaseRvAdapter<T : Any?, VB : ViewBinding> : RecyclerView.Adapter<
 
     //BaseRvAdapter类不做分页用只set最新数据
     open var mDatas: MutableList<T> = mutableListOf()
-
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -23,10 +22,10 @@ abstract class BaseRvAdapter<T : Any?, VB : ViewBinding> : RecyclerView.Adapter<
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<VB>
 
     override fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int) {
-        bindRVData(holder, holder.bindingAdapterPosition, mDatas[position])
+        bindRvData(holder, holder.bindingAdapterPosition, mDatas[position])
     }
 
-    abstract fun bindRVData(holder: ViewBindingHolder<VB>, bindingAdapterPosition: Int, item: T)
+    abstract fun bindRvData(holder: ViewBindingHolder<VB>, bindingAdapterPosition: Int, item: T)
 
     override fun getItemCount(): Int {
         return mDatas.size

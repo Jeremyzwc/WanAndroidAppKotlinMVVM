@@ -50,7 +50,7 @@ dependencies {
     //协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
     //LiveData处理activity销毁重建的数据倒灌问题，可以被多个观察者订阅
-    implementation 'com.kunminx.arch:unpeek-livedata:7.2.0-beta1'
+    implementation 'com.kunminx.arch:unpeek-livedata:7.4.0'
     //导航组件
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
@@ -65,9 +65,12 @@ dependencies {
     //下拉刷新
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 
-    implementation "com.github.bumptech.glide:glide:4.13.1"
+    implementation "com.github.bumptech.glide:glide:4.13.2"
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
     //banner图控件
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
+
+//    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
 }

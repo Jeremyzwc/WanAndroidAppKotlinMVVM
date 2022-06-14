@@ -1,9 +1,6 @@
 package com.qisan.wanandroid.http
 
-import com.qisan.wanandroid.entity.Article
-import com.qisan.wanandroid.entity.ArticleResponseBody
-import com.qisan.wanandroid.entity.Banner
-import com.qisan.wanandroid.entity.WXChapterBean
+import com.qisan.wanandroid.entity.*
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -50,4 +47,10 @@ interface WanAndroidApiService {
      */
     @GET("/wxarticle/list/{id}/{page}/json")
     suspend fun getWxArticles(@Path("id") id: Int, @Path("page") page: Int): BaseResponse<ArticleResponseBody>
+
+    /**
+     * 知识体系列表
+     */
+    @GET("tree/json")
+    suspend fun getKnowledgeTree(): BaseResponse<MutableList<KnowledgeTreeBody>>
 }

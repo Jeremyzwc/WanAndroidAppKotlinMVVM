@@ -22,7 +22,7 @@ class HomeBannerAdapter(var context: Context?) : BaseRvAdapter<MutableList<Banne
         return ViewBindingHolder(inflate)
     }
 
-    override fun bindRVData(holder: ViewBindingHolder<ItemHomeBannerBinding>, bindingAdapterPosition: Int, item: MutableList<Banner>?) {
+    override fun bindRvData(holder: ViewBindingHolder<ItemHomeBannerBinding>, bindingAdapterPosition: Int, item: MutableList<Banner>?) {
 
         val bannerFeedList = ArrayList<String>()
         val bannerTitleList = ArrayList<String>()
