@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.qisan.wanandroid"
-        minSdk 21
+        minSdk 23
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -71,6 +71,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
 
-//    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
-    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
+    implementation 'q.rorbin:badgeview:1.1.2'
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+
 }

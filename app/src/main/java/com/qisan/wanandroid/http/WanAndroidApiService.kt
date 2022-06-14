@@ -53,4 +53,10 @@ interface WanAndroidApiService {
      */
     @GET("tree/json")
     suspend fun getKnowledgeTree(): BaseResponse<MutableList<KnowledgeTreeBody>>
+
+    /**
+     * 导航数据
+     */
+    @GET("navi/json")
+    suspend fun getNavigationList(): BaseResponse<MutableList<NavigationBean>>
 }

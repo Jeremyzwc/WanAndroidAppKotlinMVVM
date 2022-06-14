@@ -47,4 +47,11 @@
         <item name="android:textColor">?android:textColorSecondary</item>
     </style>
 
+    <style name="RecyclerViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:scrollbarSize">@dimen/dp_2</item>
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
 </resources>

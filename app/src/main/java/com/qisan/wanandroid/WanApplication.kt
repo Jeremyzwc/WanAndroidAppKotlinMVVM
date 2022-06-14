@@ -2,6 +2,7 @@ package com.qisan.wanandroid
 
 import android.app.Application
 import android.content.Context
+import com.qisan.wanandroid.utils.DisplayManager
 import kotlin.properties.Delegates
 
 /**
@@ -19,6 +20,8 @@ class WanApplication : Application() {
         super.onCreate()
 
         context = applicationContext
+
+        DisplayManager.init(this)
     }
 
 }

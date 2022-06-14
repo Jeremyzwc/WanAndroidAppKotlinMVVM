@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         tools:ignore="UselessParent">
 
-        <q.rorbin.verticaltablayout.VerticalTabLayout
+        <com.qisan.wanandroid.widget.verticaltablayout.VerticalTabLayout
             android:id="@+id/navigation_tab_layout"
             android:layout_width="@dimen/dp_110"
             android:layout_height="match_parent"
@@ -34,5 +34,7 @@
             style="@style/RecyclerViewStyle" />
 
     </LinearLayout>
+
+    <include layout="@layout/layout_loading"/>
 
 </FrameLayout>
