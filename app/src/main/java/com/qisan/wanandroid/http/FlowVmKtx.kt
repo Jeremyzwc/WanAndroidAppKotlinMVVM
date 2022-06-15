@@ -18,7 +18,7 @@ import java.util.concurrent.CancellationException
  * ViewModel扩展方法实现Flow请求模板
  */
 
-suspend fun <T> BaseViewModel.launchFlow(showLayoutLoading: Boolean = true, request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
+suspend fun <T> BaseViewModel.launchFlow(showLayoutLoading: Boolean = true,isToastError :Boolean = true, request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
 
     if (showLayoutLoading) {
         showLayoutLoading()
@@ -34,11 +34,11 @@ suspend fun <T> BaseViewModel.launchFlow(showLayoutLoading: Boolean = true, requ
             if(showLayoutLoading){
                 hideLayoutLoading()
             }
-            throwable?.let { throw catchException(this@launchFlow, throwable) }
+            throwable?.let { throw catchException(this@launchFlow, throwable,isToastError) }
         }
 }
 
-suspend fun <T> BaseViewModel.postFlow(showDialogLoading: Boolean = true, loadingStr: String = "加载中...", request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
+suspend fun <T> BaseViewModel.postFlow(showDialogLoading: Boolean = true, isToastError :Boolean = true,loadingStr: String = "加载中...", request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
 
     if (showDialogLoading) {
         showDialogLoading(DialogLoadingEvent(loadingStr, true))
@@ -54,20 +54,20 @@ suspend fun <T> BaseViewModel.postFlow(showDialogLoading: Boolean = true, loadin
             if (showDialogLoading) {
                 cloaseDialogLoading(DialogLoadingEvent("", false))
             }
-            throwable?.let { throw catchException(this@postFlow, throwable) }
+            throwable?.let { throw catchException(this@postFlow, throwable,isToastError) }
         }
 }
 
 fun catchException(
     vm: BaseViewModel,
-    e: Throwable,
+    e: Throwable,isToastError :Boolean
 ): Throwable {
     e.printStackTrace()
     if (e is CancellationException) {
         return e
     }
     val errerMsg = ExceptionHandle.handleException(e)
-    if (!TextUtils.isEmpty(errerMsg)) {
+    if (isToastError && !TextUtils.isEmpty(errerMsg)) {
         vm.requestErrorEvent.postValue(errerMsg)
     }
     return e

@@ -11,6 +11,8 @@ import okhttp3.Response
  */
 class HeaderInterceptor : Interceptor {
 
+    private var token: String by SharePreferenceUtils(HttpConstant.TOKEN_KEY, "")
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
         val builder = request.newBuilder()
@@ -23,7 +25,8 @@ class HeaderInterceptor : Interceptor {
                     || url.contains(HttpConstant.UNCOLLECTIONS_WEBSITE)
                     || url.contains(HttpConstant.ARTICLE_WEBSITE)
                     || url.contains(HttpConstant.TODO_WEBSITE)
-                    || url.contains(HttpConstant.COIN_WEBSITE))) {
+                    || url.contains(HttpConstant.COIN_WEBSITE))
+        ) {
             val spDomain: String by SharePreferenceUtils(domain, "")
             val cookie: String = if (spDomain.isNotEmpty()) spDomain else ""
             if (cookie.isNotEmpty()) {

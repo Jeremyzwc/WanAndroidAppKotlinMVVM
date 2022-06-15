@@ -73,5 +73,6 @@ dependencies {
 
     implementation 'q.rorbin:badgeview:1.1.2'
     implementation 'com.hyman:flowlayout-lib:1.1.2'
-
+    //基于LiveData代替EventBus的消息总线库，具有生命周期感知
+    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
 }

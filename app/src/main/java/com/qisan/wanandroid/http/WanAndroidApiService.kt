@@ -77,8 +77,14 @@ interface WanAndroidApiService {
      */
     @POST("user/login")
     @FormUrlEncoded
-    fun loginWanAndroid(
+    suspend fun loginWanAndroid(
         @Field("username") username: String,
         @Field("password") password: String,
     ): BaseResponse<LoginInfo>
+
+    /**
+     * 获取个人信息
+     */
+    @GET("/lg/coin/userinfo/json")
+    suspend fun getUserInfo(): BaseResponse<UserInfo>
 }

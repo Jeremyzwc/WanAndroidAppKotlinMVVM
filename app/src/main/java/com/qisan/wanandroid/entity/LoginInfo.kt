@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.entity
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * Created by qisan 2022/6/15
@@ -16,4 +17,4 @@ data class LoginInfo(
     @SerializedName("token") val token: String,
     @SerializedName("type") val type: Int,
     @SerializedName("username") val username: String
-)
+): Serializable

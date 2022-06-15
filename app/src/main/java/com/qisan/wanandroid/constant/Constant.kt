@@ -10,5 +10,6 @@ object Constant {
     const val USERNAME_KEY = "username"
     const val PASSWORD_KEY = "password"
     const val TOKEN_KEY = "token"
+    const val LOGIN_INFO = "login_info"
 
 }

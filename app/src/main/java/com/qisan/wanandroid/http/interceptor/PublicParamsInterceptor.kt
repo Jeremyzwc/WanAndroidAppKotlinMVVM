@@ -15,9 +15,9 @@ class PublicParamsInterceptor: Interceptor {
         val request: Request
         val modifiedUrl = originalRequest.url.newBuilder()
             // 公共参数，正式项目中一般每个接口都要提交版本号，机器，渠道等信息因为版本不同、渠道不同会有差异化
-            .addQueryParameter("version", "")
-            .addQueryParameter("device", "")
-            .addQueryParameter("channel", "")
+//            .addQueryParameter("version", "")
+//            .addQueryParameter("device", "")
+//            .addQueryParameter("channel", "")
             .build()
         request = originalRequest.newBuilder().url(modifiedUrl).build()
         return chain.proceed(request)

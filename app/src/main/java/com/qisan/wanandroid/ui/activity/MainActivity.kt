@@ -1,6 +1,6 @@
 package com.qisan.wanandroid.ui.activity
 
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -11,10 +11,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.databinding.ActivityMainBinding
 import com.qisan.wanandroid.databinding.NavHeaderMainBinding
+import com.qisan.wanandroid.event.LoginEvent
+import com.qisan.wanandroid.global.WanUser
 import com.qisan.wanandroid.ui.fragment.*
 import com.qisan.wanandroid.utils.SettingUtil
 import com.qisan.wanandroid.utils.ToastUtils
@@ -43,7 +46,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     private var navHeaderMainBinding: NavHeaderMainBinding? = null
 
-    private val tvUsername: TextView? by lazy {
+    private val tvUserId: TextView? by lazy {
+        viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.tv_user_id)
+    }
+
+    private val tvUserName: TextView? by lazy {
         viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.tv_username)
     }
     private val tvUserGrade: TextView? by lazy {
@@ -51,6 +58,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
     private val tvUserRank: TextView? by lazy {
         viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.tv_user_rank)
+    }
+
+    private val tvScore: TextView? by lazy {
+        viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.nav_score)
     }
 
     override fun getLayoutId(): Int {
@@ -77,13 +88,23 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         navController?.let { bottomNaviView?.setupWithNavController(it) }
 
         initFragmentAdd()
+
+        initLiveDataBus()
     }
 
+    @SuppressLint("SetTextI18n")
     override fun initListener() {
         super.initListener()
 
         viewBinding?.floatingAction?.setOnClickListener {
             fabClickInto()
+        }
+
+        viewModel.userInfoLiveData.observe(this){
+            tvUserId?.text = it?.userId.toString()
+            tvUserGrade?.text = ((it?.coinCount?.div(100) ?: 0) + 1).toString()
+            tvUserRank?.text = it?.rank.toString()
+            tvScore?.text = it?.coinCount.toString()
         }
     }
 
@@ -127,9 +148,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
     }
 
-
     //通过setMaxLifecycle让Fragment可以懒加载实现
-    private fun initLazyFragment(){
+    private fun initLazyFragment() {
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, homeFragment, "action_home").commit()
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, squareFragment, "action_square").setMaxLifecycle(squareFragment, Lifecycle.State.STARTED).hide(squareFragment).commit()
         supportFragmentManager.beginTransaction().add(R.id.nav_host_fragment, weChatFragment, "action_wechat").setMaxLifecycle(weChatFragment, Lifecycle.State.STARTED).hide(weChatFragment).commit()
@@ -152,16 +172,35 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)
         }
 
-        tvUsername?.run {
+        tvUserName?.run {
             text = if (!isLogin) getString(R.string.go_login) else "username"
             setOnClickListener {
                 if (!isLogin) {
-//                    Intent(this@MainActivity, LoginActivity::class.java).run {
-//                        startActivity(this)
-//                    }
+                    LoginActivity.startActivity(this@MainActivity)
                 }
             }
         }
+    }
+
+    //事件通信监听
+    private fun initLiveDataBus() {
+        //登录监听回调
+        LiveEventBus.get(LoginEvent::class.java)
+            .observe(this) {
+                if (it.isLogin) {
+                    tvUserName?.text = WanUser.loginInfo?.username
+                    viewBinding?.navView?.menu?.findItem(R.id.nav_logout)?.isVisible = true
+                    viewModel.getUserInfo()
+                } else {
+                    tvUserName?.text = resources.getString(R.string.go_login)
+                    viewBinding?.navView?.menu?.findItem(R.id.nav_logout)?.isVisible = false
+                    // 重置用户信息
+                    tvUserId?.text = getString(R.string.nav_line_4)
+                    tvUserGrade?.text = getString(R.string.nav_line_2)
+                    tvUserRank?.text = getString(R.string.nav_line_2)
+                    tvScore?.text = ""
+                }
+            }
     }
 
     private fun fabClickInto() {

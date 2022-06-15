@@ -98,7 +98,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
         loadingDialog.showLoading()
     }
 
-
     protected fun initCommObserver() {
 
         viewModel.dialogLoadingEvent.observe(this) {

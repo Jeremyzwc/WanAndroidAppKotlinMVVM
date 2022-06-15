@@ -15,7 +15,7 @@ object HttpConstant {
     const val ARTICLE_WEBSITE = "article"
     const val TODO_WEBSITE = "lg/todo"
     const val COIN_WEBSITE = "lg/coin"
-
+    const val TOKEN_KEY = "token"
     const val COOKIE_NAME = "Cookie"
     const val SET_COOKIE_KEY = "set-cookie"
     const val SAVE_USER_LOGIN_KEY = "user/login"
