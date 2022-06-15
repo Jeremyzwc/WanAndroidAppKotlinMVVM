@@ -9,5 +9,4 @@ import com.qisan.wanandroid.base.BaseViewModel
 class MainViewModel : BaseViewModel() {
 
 
-
 }

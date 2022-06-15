@@ -11,4 +11,7 @@ open class CommonViewModel: BaseViewModel() {
 
     //公众号id
     var wxChatId: Int = 0
+
+    //项目列表的id
+    var cid: Int = 0
 }

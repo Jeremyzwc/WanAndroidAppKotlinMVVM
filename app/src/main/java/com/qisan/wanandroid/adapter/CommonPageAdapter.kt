@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter
  * Created by qisan 2022/6/13
  * com.qisan.wanandroid.adapter
  */
-class WxChatPageAdapter(@NonNull fm: FragmentManager, behavior: Int,private var fragments: List<Fragment>,private var tabList: List<String>) : FragmentPagerAdapter(fm, behavior) {
+class CommonPageAdapter(@NonNull fm: FragmentManager, behavior: Int, private var fragments: List<Fragment>, private var tabList: List<String>) : FragmentPagerAdapter(fm, behavior) {
 
     override fun getCount(): Int {
         return fragments.size

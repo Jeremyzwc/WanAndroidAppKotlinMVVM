@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="gone"
-    android:background="@color/white">
+    android:background="@color/bg_theme">
 
     <ProgressBar
         android:id="@+id/progressBar2"

@@ -3,6 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        jcenter()
     }
 }
 dependencyResolutionManagement {
@@ -14,6 +15,7 @@ dependencyResolutionManagement {
         maven {
             url 'https://maven.google.com'
         }
+        jcenter()
     }
 }
 rootProject.name = "WanAndroidAppKotlinMVVM"

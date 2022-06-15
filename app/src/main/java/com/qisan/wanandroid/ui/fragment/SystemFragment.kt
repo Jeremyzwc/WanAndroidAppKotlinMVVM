@@ -4,12 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.adapter.SystemPageAdapter
-import com.qisan.wanandroid.adapter.WxChatPageAdapter
+import com.qisan.wanandroid.adapter.CommonPageAdapter
 import com.qisan.wanandroid.base.BaseFragment
-import com.qisan.wanandroid.databinding.FragmentHomeBinding
 import com.qisan.wanandroid.databinding.FragmentSystemBinding
-import com.qisan.wanandroid.utils.saveAs
 import com.qisan.wanandroid.vm.HomeViewModel
 
 /**
@@ -21,7 +18,7 @@ class SystemFragment : BaseFragment<FragmentSystemBinding,HomeViewModel>() {
     private val fragments = mutableListOf<Fragment>()
     private val tabList = mutableListOf<String>()
 
-    private var systemPageAdapter: SystemPageAdapter? = null
+    private var systemPageAdapter: CommonPageAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_system
@@ -34,7 +31,7 @@ class SystemFragment : BaseFragment<FragmentSystemBinding,HomeViewModel>() {
         fragments.add(KnowledgeTreeFragment.newInstance())
         fragments.add(NavigationFragment.newInstance())
 
-        systemPageAdapter = SystemPageAdapter(childFragmentManager,
+        systemPageAdapter = CommonPageAdapter(childFragmentManager,
             FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments,tabList)
         viewBinding?.viewPager?.adapter = systemPageAdapter
         viewBinding?.tabLayout?.setupWithViewPager(viewBinding?.viewPager)

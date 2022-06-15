@@ -3,6 +3,7 @@ package com.qisan.wanandroid.ui.activity
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -12,12 +13,10 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseActivity
-import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.databinding.ActivityMainBinding
 import com.qisan.wanandroid.databinding.NavHeaderMainBinding
 import com.qisan.wanandroid.ui.fragment.*
 import com.qisan.wanandroid.utils.SettingUtil
-import com.qisan.wanandroid.utils.SharePreferenceUtils
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
 import com.qisan.wanandroid.vm.MainViewModel
@@ -43,6 +42,16 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private var activeFragment: Fragment = homeFragment
 
     private var navHeaderMainBinding: NavHeaderMainBinding? = null
+
+    private val tvUsername: TextView? by lazy {
+        viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.tv_username)
+    }
+    private val tvUserGrade: TextView? by lazy {
+        viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.tv_user_grade)
+    }
+    private val tvUserRank: TextView? by lazy {
+        viewBinding?.navView?.getHeaderView(0)?.findViewById(R.id.tv_user_rank)
+    }
 
     override fun getLayoutId(): Int {
         return R.layout.activity_main
@@ -141,6 +150,17 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun initMainNav() {
         viewBinding?.navView?.run {
             setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)
+        }
+
+        tvUsername?.run {
+            text = if (!isLogin) getString(R.string.go_login) else "username"
+            setOnClickListener {
+                if (!isLogin) {
+//                    Intent(this@MainActivity, LoginActivity::class.java).run {
+//                        startActivity(this)
+//                    }
+                }
+            }
         }
     }
 

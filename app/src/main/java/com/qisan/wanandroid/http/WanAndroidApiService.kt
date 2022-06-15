@@ -1,8 +1,7 @@
 package com.qisan.wanandroid.http
 
 import com.qisan.wanandroid.entity.*
-import retrofit2.http.GET
-import retrofit2.http.Path
+import retrofit2.http.*
 
 /**
  * 接口
@@ -59,4 +58,27 @@ interface WanAndroidApiService {
      */
     @GET("navi/json")
     suspend fun getNavigationList(): BaseResponse<MutableList<NavigationBean>>
+
+    /**
+     * 项目列表tab
+     */
+    @GET("project/tree/json")
+    suspend fun getProjectTree(): BaseResponse<MutableList<ProjectTreeBean>>
+
+    /**
+     * 项目列表数据
+     */
+    @GET("project/list/{page}/json")
+    suspend fun getProjectList(@Path("page") page: Int, @Query("cid") cid: Int): BaseResponse<ArticleResponseBody>
+
+
+    /**
+     * 登录
+     */
+    @POST("user/login")
+    @FormUrlEncoded
+    fun loginWanAndroid(
+        @Field("username") username: String,
+        @Field("password") password: String,
+    ): BaseResponse<LoginInfo>
 }

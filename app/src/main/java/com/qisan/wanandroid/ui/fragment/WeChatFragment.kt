@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.adapter.WxChatPageAdapter
+import com.qisan.wanandroid.adapter.CommonPageAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentWechatBinding
 import com.qisan.wanandroid.utils.saveAs
@@ -18,7 +18,7 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
 
     private val fragments: MutableList<Fragment> = mutableListOf()
 
-    private var wxChatPageAdapter: WxChatPageAdapter? = null
+    private var wxChatPageAdapter: CommonPageAdapter? = null
 
     override fun getLayoutId(): Int {
         return R.layout.fragment_wechat
@@ -40,7 +40,7 @@ class WeChatFragment : BaseFragment<FragmentWechatBinding,WeChatViewModel>() {
                 tabList.add(item.name)
             }
 
-            wxChatPageAdapter = WxChatPageAdapter(childFragmentManager,
+            wxChatPageAdapter = CommonPageAdapter(childFragmentManager,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments,tabList)
             viewBinding?.viewPager?.adapter = wxChatPageAdapter
             viewBinding?.tabLayout?.setupWithViewPager(viewBinding?.viewPager)
