@@ -1,0 +1,28 @@
+ext {
+    compileSdkVersion = 31
+    minSdkVersion = 23
+
+    targetSdkVersion = 31
+    androidGradleVersion = '4.0.2'
+
+    abiFilters = ['armeabi-v7a', 'arm64-v8a']
+
+
+    wanAndroidConfig = [releaseKeystorePath: projectDir.path + "/release/wanandroid.jks",
+                      keyAlias           : "wan",
+                      keyPassword        : "123456",
+                      storePassword      : "123456"]
+
+    Properties properties = new Properties()
+    File propertiesFile = project.rootProject.file('local.properties')
+    if (propertiesFile.exists()) {
+        InputStream inputStream = propertiesFile.newDataInputStream()
+        properties.load(inputStream)
+    }
+//    user = properties.getProperty("gpr.user")
+//    token = properties.getProperty("gpr.key")
+    IS_TEST_EVN = project.hasProperty("IS_TEST_EVN") ? project.ext["IS_TEST_EVN"] : properties.getProperty("IS_TEST_EVN")
+    IS_PUBLISH = project.hasProperty("IS_PUBLISH") ? project.ext["IS_PUBLISH"] : "true"
+    BUILD_TYPE = project.hasProperty("BUILD_TYPES") ? project.ext["BUILD_TYPES"] : "release"
+    JIAGU_CHANNEL = project.hasProperty("JIAGU_CHANNEL")?project.ext["JIAGU_CHANNEL"]:"Google"
+}

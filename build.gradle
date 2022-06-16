@@ -1,12 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = '1.6.21'
+    apply from: "config.gradle"
     repositories {
         mavenCentral()
         jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //混淆组件，对以往一些保留的文件和方法进行混淆
+        classpath 'me.ele:mess-plugin:2.0.0'
     }
 }
 

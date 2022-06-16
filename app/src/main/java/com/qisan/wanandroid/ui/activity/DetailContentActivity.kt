@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -67,7 +68,6 @@ class DetailContentActivity: BaseActivity<ActivityDetailContentBinding,DetailCon
         }
 
         viewBinding?.toolbarLayout?.toolbar.apply {
-            title = ""//getString(R.string.loading)
             setSupportActionBar(this)
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
@@ -111,7 +111,10 @@ class DetailContentActivity: BaseActivity<ActivityDetailContentBinding,DetailCon
     private val mWebChromeClient = object : WebChromeClient() {
         override fun onReceivedTitle(view: WebView, title: String) {
             super.onReceivedTitle(view, title)
-            viewBinding?.toolbarLayout?.tvTitle?.text = title
+            viewBinding?.toolbarLayout?.tvTitle?.run {
+                visibility = View.VISIBLE
+                text = title
+            }
         }
     }
 
@@ -153,6 +156,10 @@ class DetailContentActivity: BaseActivity<ActivityDetailContentBinding,DetailCon
                     startActivity(this)
                 }
                 return true
+            }
+
+            android.R.id.home -> {
+                finish()
             }
         }
         return super.onOptionsItemSelected(item)

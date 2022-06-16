@@ -1,7 +1,6 @@
 package com.qisan.wanandroid.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.DialogInterface
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
