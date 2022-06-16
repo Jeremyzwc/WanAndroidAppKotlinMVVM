@@ -1,7 +1,7 @@
 package com.qisan.wanandroid.base
 
-import com.qisan.wanandroid.entity.DialogLoadingEvent
-import com.qisan.wanandroid.entity.LoadingErrorEvent
+import com.qisan.wanandroid.event.DialogLoadingEvent
+import com.qisan.wanandroid.event.LoadingErrorEvent
 
 /**
  * Created by qisan 2022/5/20

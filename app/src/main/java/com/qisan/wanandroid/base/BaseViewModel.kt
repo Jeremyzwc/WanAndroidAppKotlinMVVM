@@ -3,8 +3,8 @@ package com.qisan.wanandroid.base
 import androidx.lifecycle.ViewModel
 import com.kunminx.architecture.ui.callback.UnPeekLiveData
 import com.qisan.wanandroid.WanApplication
-import com.qisan.wanandroid.entity.DialogLoadingEvent
-import com.qisan.wanandroid.entity.LoadingErrorEvent
+import com.qisan.wanandroid.event.DialogLoadingEvent
+import com.qisan.wanandroid.event.LoadingErrorEvent
 
 /**
  * Created by qisan 2022/5/17

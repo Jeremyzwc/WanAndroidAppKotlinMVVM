@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.entity
+package com.qisan.wanandroid.event
 
 /**
  * Created by qisan 2022/5/23
