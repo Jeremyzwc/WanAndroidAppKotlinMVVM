@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.DialogInterface
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -19,6 +20,7 @@ import com.qisan.wanandroid.databinding.NavHeaderMainBinding
 import com.qisan.wanandroid.event.LoginEvent
 import com.qisan.wanandroid.global.WanUser
 import com.qisan.wanandroid.ui.fragment.*
+import com.qisan.wanandroid.utils.DialogUtil
 import com.qisan.wanandroid.utils.SettingUtil
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.utils.saveAs
@@ -90,6 +92,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         initFragmentAdd()
 
         initLiveDataBus()
+
     }
 
     @SuppressLint("SetTextI18n")
@@ -98,13 +101,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         viewBinding?.floatingAction?.setOnClickListener {
             fabClickInto()
-        }
-
-        viewModel.userInfoLiveData.observe(this){
-            tvUserId?.text = it?.userId.toString()
-            tvUserGrade?.text = ((it?.coinCount?.div(100) ?: 0) + 1).toString()
-            tvUserRank?.text = it?.rank.toString()
-            tvScore?.text = it?.coinCount.toString()
         }
     }
 
@@ -170,12 +166,14 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private fun initMainNav() {
         viewBinding?.navView?.run {
             setNavigationItemSelectedListener(drawerNavigationItemSelectedListener)
+
+            menu.findItem(R.id.nav_logout).isVisible = WanUser.isLogin()
         }
 
         tvUserName?.run {
-            text = if (!isLogin) getString(R.string.go_login) else "username"
+            text = if (!WanUser.isLogin()) getString(R.string.go_login) else WanUser.getLogin()?.username
             setOnClickListener {
-                if (!isLogin) {
+                if (!WanUser.isLogin()) {
                     LoginActivity.startActivity(this@MainActivity)
                 }
             }
@@ -183,24 +181,41 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     //事件通信监听
+    @SuppressLint("SetTextI18n")
     private fun initLiveDataBus() {
         //登录监听回调
         LiveEventBus.get(LoginEvent::class.java)
             .observe(this) {
-                if (it.isLogin) {
-                    tvUserName?.text = WanUser.loginInfo?.username
-                    viewBinding?.navView?.menu?.findItem(R.id.nav_logout)?.isVisible = true
-                    viewModel.getUserInfo()
-                } else {
-                    tvUserName?.text = resources.getString(R.string.go_login)
-                    viewBinding?.navView?.menu?.findItem(R.id.nav_logout)?.isVisible = false
-                    // 重置用户信息
-                    tvUserId?.text = getString(R.string.nav_line_4)
-                    tvUserGrade?.text = getString(R.string.nav_line_2)
-                    tvUserRank?.text = getString(R.string.nav_line_2)
-                    tvScore?.text = ""
-                }
+                setUserInfo(it.isLogin)
             }
+
+
+        viewModel.userInfoLiveData.observe(this) {
+            tvUserId?.text = it?.userId.toString()
+            tvUserGrade?.text = ((it?.coinCount?.div(100) ?: 0) + 1).toString()
+            tvUserRank?.text = it?.rank.toString()
+            tvScore?.text = it?.coinCount.toString()
+        }
+
+        viewModel.logoutLiveData.observe(this){
+            setUserInfo(false)
+        }
+    }
+
+    private fun setUserInfo(isLogin: Boolean){
+        if (isLogin) {
+            tvUserName?.text = WanUser.loginInfo?.username
+            viewBinding?.navView?.menu?.findItem(R.id.nav_logout)?.isVisible = true
+            viewModel.getUserInfo()
+        } else {
+            tvUserName?.text = resources.getString(R.string.go_login)
+            viewBinding?.navView?.menu?.findItem(R.id.nav_logout)?.isVisible = false
+            // 重置用户信息
+            tvUserId?.text = getString(R.string.nav_line_4)
+            tvUserGrade?.text = getString(R.string.nav_line_2)
+            tvUserRank?.text = getString(R.string.nav_line_2)
+            tvScore?.text = ""
+        }
     }
 
     private fun fabClickInto() {
@@ -260,7 +275,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     private val drawerNavigationItemSelectedListener = NavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_score -> {
-                if (isLogin) {
+                if (WanUser.isLogin()) {
 //                    Intent(this@MainActivity, ScoreActivity::class.java).run {
 //                        startActivity(this)
 //                    }
@@ -270,7 +285,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 }
             }
             R.id.nav_collect -> {
-                if (isLogin) {
+                if (WanUser.isLogin()) {
 //                    goCommonActivity(Constant.Type.COLLECT_TYPE_KEY)
                 } else {
                     ToastUtils.show(resources.getString(R.string.login_tint))
@@ -278,7 +293,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 }
             }
             R.id.nav_share -> {
-                if (isLogin) {
+                if (WanUser.isLogin()) {
 //                    startActivity(Intent(this, ShareActivity::class.java))
                 } else {
                     ToastUtils.show(resources.getString(R.string.login_tint))
@@ -291,7 +306,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 //                }
             }
             R.id.nav_logout -> {
-//                logout()
+
+                DialogUtil.getConfirmDialog(this, resources.getString(R.string.confirm_logout)) { _, _ ->
+                    viewModel.logout(resources.getString(R.string.logout_ing))
+                }.show()
             }
             R.id.nav_night_mode -> {
                 if (SettingUtil.getIsNightMode()) {
@@ -305,7 +323,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                 recreate()
             }
             R.id.nav_todo -> {
-                if (isLogin) {
+                if (WanUser.isLogin()) {
 //                    Intent(this@MainActivity, TodoActivity::class.java).run {
 //                        startActivity(this)
 //                    }
@@ -317,6 +335,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
         true
     }
+
+
 
     override fun recreate() {
         try {

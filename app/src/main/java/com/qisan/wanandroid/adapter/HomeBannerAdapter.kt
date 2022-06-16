@@ -8,6 +8,7 @@ import cn.bingoogolapple.bgabanner.BGABanner
 import com.qisan.wanandroid.databinding.ItemArticleBinding
 import com.qisan.wanandroid.databinding.ItemHomeBannerBinding
 import com.qisan.wanandroid.entity.Banner
+import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.utils.GlideUtils
 
 /**
@@ -34,7 +35,8 @@ class HomeBannerAdapter(var context: Context?) : BaseRvAdapter<MutableList<Banne
         val bannerDelegate = BGABanner.Delegate<ImageView, String> { banner, imageView, model, position ->
             if (item?.isNotEmpty() == true) {
                 val data = item[position]
-//            ContentActivity.start(activity, data.id, data.title, data.url)
+
+                DetailContentActivity.startActivity(context, data.id, data.title, data.url)
             }
         }
 

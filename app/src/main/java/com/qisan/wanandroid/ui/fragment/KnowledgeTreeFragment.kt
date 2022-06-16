@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.qisan.wanandroid.R
@@ -8,6 +9,7 @@ import com.qisan.wanandroid.adapter.FooterAdapter
 import com.qisan.wanandroid.adapter.KnowledgeTreeAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentKnowledgeTreeBinding
+import com.qisan.wanandroid.listener.ItemClickListener
 import com.qisan.wanandroid.vm.KnowledgeTreeViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 
@@ -66,6 +68,12 @@ class KnowledgeTreeFragment: BaseFragment<FragmentKnowledgeTreeBinding, Knowledg
         viewBinding?.refreshLayout?.setOnRefreshListener {
             viewModel.getKnowledgeTreeList()
         }
+
+        knowledgeTreeAdapter.setItemClick(object : ItemClickListener{
+            override fun onItemClicked(v: View?, position: Int) {
+
+            }
+        })
     }
 
     override fun scrollToTop() {

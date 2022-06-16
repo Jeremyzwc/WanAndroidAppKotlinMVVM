@@ -12,6 +12,8 @@ import com.qisan.wanandroid.adapter.HomeBannerAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentHomeBinding
 import com.qisan.wanandroid.entity.Banner
+import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.HomeViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 
@@ -26,10 +28,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
     }
 
     private val articleAdapter by lazy {
-        ArticleAdapter()
+        ArticleAdapter(requireActivity())
     }
 
     private val wrapRecyclerAdapter by lazy {
+        articleAdapter.setVm(viewModel)
         articleAdapter.withLoadStateFooter(FooterAdapter())
     }
 
@@ -89,6 +92,16 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
             viewBinding?.recyclerView?.swapAdapter(wrapRecyclerAdapter, true)
             articleAdapter.refresh()
         }
+
+
+        articleAdapter.setItemClick(object : ItemClickListener{
+            override fun onItemClicked(v: View?, position: Int) {
+                val data = articleAdapter.getData(position)
+                if (data != null) {
+                    DetailContentActivity.startActivity(context, data.id, data.title, data.link)
+                }
+            }
+        })
     }
 
     /**

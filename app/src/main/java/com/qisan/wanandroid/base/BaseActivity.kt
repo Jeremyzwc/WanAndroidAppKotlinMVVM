@@ -46,7 +46,6 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
     protected var isShowLoadingLayout = false
     protected var isShowErrorLayout = false
     protected lateinit var errorMsg: String
-    protected var isLogin: Boolean by SharePreferenceUtils(Constant.LOGIN_KEY, false)
 
     protected var mThemeColor: Int = SettingUtil.getColor()
 

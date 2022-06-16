@@ -13,16 +13,18 @@ import com.qisan.wanandroid.utils.SharePreferenceUtils
 object WanUser {
 
     var loginInfo: LoginInfo? = null
+    var loginInfoStr: String by SharePreferenceUtils(Constant.LOGIN_INFO, "")
+
+    init {
+        loginInfo = Gson().fromJson(loginInfoStr,LoginInfo::class.java)
+    }
 
     fun isLogin(): Boolean{
-        val loginInfoStr: String by SharePreferenceUtils(Constant.LOGIN_INFO, "")
-        loginInfo = Gson().fromJson(loginInfoStr,LoginInfo::class.java)
         return loginInfo != null
     }
 
-    fun getLogin(): LoginInfo{
-        val loginInfoStr: String by SharePreferenceUtils(Constant.LOGIN_INFO, "")
-        return Gson().fromJson(loginInfoStr,LoginInfo::class.java)
+    fun getLogin(): LoginInfo?{
+        return loginInfo
     }
 
 }

@@ -21,7 +21,7 @@ import com.qisan.wanandroid.widget.RvItemDecoration
 class SquareFragment : BaseFragment<FragmentSquareBinding, SquareViewModel>() {
 
     private val articleAdapter by lazy {
-        ArticleAdapter()
+        ArticleAdapter(requireActivity())
     }
 
     private val linearLayoutManager: LinearLayoutManager by lazy {
@@ -36,6 +36,7 @@ class SquareFragment : BaseFragment<FragmentSquareBinding, SquareViewModel>() {
     override fun initData() {
 
         viewBinding?.recyclerView?.run {
+            articleAdapter.setVm(viewModel)
             layoutManager = linearLayoutManager
             adapter = articleAdapter.withLoadStateHeader(FooterAdapter())
             itemAnimator = DefaultItemAnimator()

@@ -4,8 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.qisan.wanandroid.base.BaseViewModel
 import com.qisan.wanandroid.entity.UserInfo
+import com.qisan.wanandroid.global.WanUser
 import com.qisan.wanandroid.http.launchFlow
 import com.qisan.wanandroid.http.next
+import com.qisan.wanandroid.http.postFlow
+import com.qisan.wanandroid.utils.SharePreferenceUtils
 import kotlinx.coroutines.launch
 /**
  * Created by qisan 2022/5/18
@@ -14,6 +17,7 @@ import kotlinx.coroutines.launch
 class MainViewModel : BaseViewModel() {
 
     val userInfoLiveData = MutableLiveData<UserInfo?>()
+    val logoutLiveData = MutableLiveData<Any?>()
 
     fun getUserInfo(){
 
@@ -22,6 +26,20 @@ class MainViewModel : BaseViewModel() {
                 getUserInfo()
             }.next {
                 userInfoLiveData.postValue(data)
+            }
+        }
+    }
+
+    fun logout(loadingStr: String){
+        viewModelScope.launch {
+            postFlow(loadingStr = loadingStr){
+                logout()
+            }.next {
+                WanUser.loginInfo = null
+                WanUser.loginInfoStr = ""
+                SharePreferenceUtils.clearPreference()
+
+                logoutLiveData.postValue(data)
             }
         }
     }

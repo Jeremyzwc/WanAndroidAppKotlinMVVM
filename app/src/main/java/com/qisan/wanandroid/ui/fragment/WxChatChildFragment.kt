@@ -22,7 +22,7 @@ class WxChatChildFragment: BaseFragment<FragmentWxchatChildBinding,WxChatChildVi
     private var weChatId: Int = 0
 
     private val articleAdapter by lazy {
-        ArticleAdapter()
+        ArticleAdapter(requireActivity())
     }
 
     private val linearLayoutManager: LinearLayoutManager by lazy {
@@ -50,6 +50,7 @@ class WxChatChildFragment: BaseFragment<FragmentWxchatChildBinding,WxChatChildVi
 
 
         viewBinding?.recyclerView?.run {
+            articleAdapter.setVm(viewModel)
             layoutManager = linearLayoutManager
             adapter = articleAdapter.withLoadStateHeader(FooterAdapter())
             itemAnimator = DefaultItemAnimator()

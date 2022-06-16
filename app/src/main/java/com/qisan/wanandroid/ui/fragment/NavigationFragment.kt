@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -9,6 +10,7 @@ import com.qisan.wanandroid.adapter.NavigationAdapter
 import com.qisan.wanandroid.adapter.NavigationTabAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentNavigationBinding
+import com.qisan.wanandroid.listener.ItemClickListener
 import com.qisan.wanandroid.vm.NavigationViewModel
 import com.qisan.wanandroid.widget.verticaltablayout.VerticalTabLayout
 import com.qisan.wanandroid.widget.verticaltablayout.widget.TabView
@@ -68,6 +70,12 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding, NavigationVie
                 navigationAdapter.mDatas = list
             }
         }
+
+        navigationAdapter.setItemClick(object : ItemClickListener {
+            override fun onItemClicked(v: View?, position: Int) {
+
+            }
+        })
 
     }
 

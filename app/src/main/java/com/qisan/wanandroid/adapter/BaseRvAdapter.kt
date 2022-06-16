@@ -1,9 +1,13 @@
 package com.qisan.wanandroid.adapter
 
 import android.annotation.SuppressLint
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.wanandroid.listener.ItemLongClickListener
+import com.qisan.wanandroid.listener.OnMultiClickListener
 
 /**
  * Created by qisan 2022/6/2
@@ -11,6 +15,9 @@ import androidx.viewbinding.ViewBinding
  */
 @SuppressLint("NotifyDataSetChanged")
 abstract class BaseRvAdapter<T : Any?, VB : ViewBinding> : RecyclerView.Adapter<ViewBindingHolder<VB>>() {
+
+    protected var itemClickListener: ItemClickListener? = null
+    protected var itemLongClickListener: ItemLongClickListener? = null
 
     //BaseRvAdapter类不做分页用只set最新数据
     open var mDatas: MutableList<T> = mutableListOf()
@@ -22,6 +29,18 @@ abstract class BaseRvAdapter<T : Any?, VB : ViewBinding> : RecyclerView.Adapter<
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<VB>
 
     override fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int) {
+
+        holder.binding.root.setOnClickListener(object : OnMultiClickListener(){
+            override fun onMultiClick(view: View?) {
+                itemClickListener?.onItemClicked(view, holder.bindingAdapterPosition)
+            }
+        })
+
+        holder.binding.root.setOnLongClickListener { v ->
+            itemLongClickListener?.onItemLongClicked(v, holder.bindingAdapterPosition)
+            true
+        }
+
         bindRvData(holder, holder.bindingAdapterPosition, mDatas[position])
     }
 
@@ -29,5 +48,13 @@ abstract class BaseRvAdapter<T : Any?, VB : ViewBinding> : RecyclerView.Adapter<
 
     override fun getItemCount(): Int {
         return mDatas.size
+    }
+
+    open fun setItemClick(itemClickListener: ItemClickListener?) {
+        this.itemClickListener = itemClickListener
+    }
+
+    open fun setItemLongClick(itemLongClickListener: ItemLongClickListener?) {
+        this.itemLongClickListener = itemLongClickListener
     }
 }

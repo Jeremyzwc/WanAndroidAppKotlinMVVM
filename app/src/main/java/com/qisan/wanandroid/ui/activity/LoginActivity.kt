@@ -2,20 +2,18 @@ package com.qisan.wanandroid.ui.activity
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
+import android.view.MenuItem
 import com.google.gson.Gson
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.databinding.ActivityLoginBinding
-import com.qisan.wanandroid.entity.LoginInfo
 import com.qisan.wanandroid.event.LoginEvent
 import com.qisan.wanandroid.global.WanUser
 import com.qisan.wanandroid.utils.SharePreferenceUtils
 import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.vm.LoginViewModel
-
 
 /**
  * Created by qisan 2022/6/15
@@ -53,13 +51,12 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
 
         viewModel.loginInfoLiveData.observe(this) {
             ToastUtils.show(getString(R.string.login_success))
-            isLogin = true
             user = it?.username.toString()
             pwd = it?.password.toString()
             token = it?.token.toString()
 
             loginInfoStr = Gson().toJson(it)
-
+            WanUser.loginInfo = it
             LiveEventBus
                 .get(LoginEvent::class.java)
                 .post(LoginEvent(true))
@@ -77,6 +74,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         viewBinding?.tvSignUp?.setOnClickListener {
 
         }
+
+
     }
 
     private fun login() {
@@ -93,5 +92,14 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
         }
 
         viewModel.login(username, password)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

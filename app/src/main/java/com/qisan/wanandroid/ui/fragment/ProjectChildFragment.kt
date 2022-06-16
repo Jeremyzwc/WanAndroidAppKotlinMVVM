@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,7 @@ import com.qisan.wanandroid.adapter.FooterAdapter
 import com.qisan.wanandroid.adapter.ProjectListAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentProjectChildBinding
+import com.qisan.wanandroid.listener.ItemClickListener
 import com.qisan.wanandroid.vm.ProjectChildViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 
@@ -48,6 +50,7 @@ class ProjectChildFragment : BaseFragment<FragmentProjectChildBinding, ProjectCh
         viewModel.cid = this.cid
 
         viewBinding?.recyclerView?.run {
+            mAdapter.setVm(viewModel)
             layoutManager = linearLayoutManager
             adapter = mAdapter.withLoadStateHeader(FooterAdapter())
             itemAnimator = DefaultItemAnimator()
@@ -82,6 +85,12 @@ class ProjectChildFragment : BaseFragment<FragmentProjectChildBinding, ProjectCh
             viewBinding?.recyclerView?.swapAdapter(mAdapter, true)
             mAdapter.refresh()
         }
+
+        mAdapter.setItemClick(object : ItemClickListener{
+            override fun onItemClicked(v: View?, position: Int) {
+
+            }
+        })
     }
 
 

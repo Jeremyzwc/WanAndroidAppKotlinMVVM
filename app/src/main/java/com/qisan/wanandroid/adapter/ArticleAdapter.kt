@@ -1,20 +1,26 @@
 package com.qisan.wanandroid.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.WanApplication.Companion.context
-import com.qisan.wanandroid.adapter.ViewBindingHolder
 import com.qisan.wanandroid.databinding.ItemArticleBinding
 import com.qisan.wanandroid.entity.Article
+import com.qisan.wanandroid.global.WanUser
+import com.qisan.wanandroid.listener.OnMultiClickListener
+import com.qisan.wanandroid.ui.activity.LoginActivity
+import com.qisan.wanandroid.ui.activity.MainActivity
 import com.qisan.wanandroid.utils.GlideUtils
+import com.qisan.wanandroid.utils.ToastUtils
+import com.qisan.wanandroid.utils.saveAs
 
 /**
  * Created by QiSan 2022/5/29
  * package com.qisan.wanandroid.adapter
  */
-class ArticleAdapter : BasePagingDataAdapter<Article, ItemArticleBinding>(
+class ArticleAdapter(var context: Context) : BasePagingDataAdapter<Article, ItemArticleBinding>(
     itemCallback(
         areItemsTheSame = { oldItem, newItem ->
             oldItem.id == newItem.id
@@ -24,7 +30,6 @@ class ArticleAdapter : BasePagingDataAdapter<Article, ItemArticleBinding>(
         }
     )
 ) {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<ItemArticleBinding> {
         val inflate = ItemArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewBindingHolder(inflate)
@@ -74,6 +79,24 @@ class ArticleAdapter : BasePagingDataAdapter<Article, ItemArticleBinding>(
         } else {
             holder.binding.tvArticleTag.visibility = View.GONE
         }
+
+        holder.binding.ivLike.setOnClickListener(object : OnMultiClickListener() {
+            override fun onMultiClick(view: View?) {
+                if(WanUser.isLogin()){
+                    val collect = item.collect
+                    item.collect = !collect
+                    notifyItemChanged(position, item)
+                    if(!collect){
+                        viewModel?.addCollectArticle(item.id)
+                    }else{
+                        viewModel?.cancelCollectArticle(item.id)
+                    }
+                }else{
+                    LoginActivity.startActivity(context)
+                    ToastUtils.show(context.resources.getString(R.string.login_tint))
+                }
+            }
+        })
     }
 
 }

@@ -87,4 +87,22 @@ interface WanAndroidApiService {
      */
     @GET("/lg/coin/userinfo/json")
     suspend fun getUserInfo(): BaseResponse<UserInfo>
+
+    /**
+     * 退出登录
+     */
+    @GET("user/logout/json")
+    suspend fun logout(): BaseResponse<Any>
+
+    /**
+     * 文章收藏
+     */
+    @POST("lg/collect/{id}/json")
+    suspend fun addCollectArticle(@Path("id") id: Int): BaseResponse<Any>
+
+    /**
+     * 文章取消收藏
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    suspend fun cancelCollectArticle(@Path("id") id: Int): BaseResponse<Any>
 }
