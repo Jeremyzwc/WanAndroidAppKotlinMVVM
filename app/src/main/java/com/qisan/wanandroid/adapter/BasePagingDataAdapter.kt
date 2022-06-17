@@ -64,14 +64,6 @@ abstract class BasePagingDataAdapter<T : Any, VB : ViewBinding> : PagingDataAdap
         getItem(position)?.let{ onBindViewHolder(holder, holder.bindingAdapterPosition, holder.binding, it) }
     }
 
-    override fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int, payloads: MutableList<Any>) {
-        if (payloads.isEmpty()) {
-            onBindViewHolder(holder, position)
-        } else {
-            super.onBindViewHolder(holder, position, payloads)
-        }
-    }
-
     abstract override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<VB>
 
     abstract fun onBindViewHolder(holder: ViewBindingHolder<VB>, position: Int, binding: VB, item: T)

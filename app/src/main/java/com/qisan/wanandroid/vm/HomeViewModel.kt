@@ -35,7 +35,6 @@ class HomeViewModel : CommonViewModel() {
     }
 
      fun getBanner(){
-
         viewModelScope.launch {
             launchFlow(false) {
                 getBanners()

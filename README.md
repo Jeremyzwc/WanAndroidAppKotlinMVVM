@@ -38,3 +38,4 @@ API是采用的鸿神开放[**玩 Android API**](http://www.wanandroid.com/blog/
 - [leakcanary](https://github.com/square/leakcanary)
 - [AndroidAutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
 
+**感谢所有优秀的开源项目**
