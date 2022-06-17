@@ -17,6 +17,8 @@ API是采用的鸿神开放[**玩 Android API**](http://www.wanandroid.com/blog/
 
 封装基类:BaseActivity、BaseFragment、BaseViewModel、BasePagingSource、BasePagingDataAdapter、BaseRvAdapter，BaseLifecycleDialog
 
+使用反射实现ViewBinding和ViewModel的模板式绑定
+
 初始化ViewModel时将其和Activity的生命周期绑定
 
 通过新的setMaxLifecycle方法实现Fragment的懒加载
