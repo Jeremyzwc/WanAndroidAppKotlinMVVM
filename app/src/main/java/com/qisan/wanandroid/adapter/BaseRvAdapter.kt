@@ -10,6 +10,8 @@ import com.qisan.wanandroid.listener.ItemLongClickListener
 import com.qisan.wanandroid.listener.OnMultiClickListener
 
 /**
+ * RecyclerView.Adapter的简单封装，当非分页需求时使用
+ *
  * Created by qisan 2022/6/2
  * com.qisan.wanandroid.adapter
  */

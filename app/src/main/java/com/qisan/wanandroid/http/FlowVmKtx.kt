@@ -16,6 +16,10 @@ import java.util.concurrent.CancellationException
  * ViewModel扩展方法实现Flow请求模板
  */
 
+/**
+ * showLayoutLoading 是否显示布局加载状态
+ * isToastError 接口失败是否弹toast
+ */
 suspend fun <T> BaseViewModel.launchFlow(showLayoutLoading: Boolean = true,isToastError :Boolean = true, request: suspend WanAndroidApiService.() -> BaseResponse<T>): Flow<BaseResponse<T>> {
 
     if (showLayoutLoading) {

@@ -74,6 +74,7 @@ open abstract class BaseFragment<VB : ViewBinding, VM : BaseViewModel> : Fragmen
         super.onCreate(savedInstanceState)
     }
 
+    //通过在onResume中实现懒加载
     override fun onResume() {
         super.onResume()
         if(!isDataInitiated && isPrepared){

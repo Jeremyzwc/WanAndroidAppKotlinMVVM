@@ -70,7 +70,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     override fun initData() {
-
+        //侧滑布局中的个人信息展示的header
         navHeaderMainBinding = NavHeaderMainBinding.inflate(layoutInflater)
 
         viewBinding?.toolbarLayout?.toolbar.run {
@@ -91,13 +91,12 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         initFragmentAdd()
 
         initLiveDataBus()
-
     }
 
     @SuppressLint("SetTextI18n")
     override fun initListener() {
         super.initListener()
-
+        //悬浮按钮点击
         viewBinding?.floatingAction?.setOnClickListener {
             fabClickInto()
         }
@@ -334,8 +333,6 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         }
         true
     }
-
-
 
     override fun recreate() {
         try {

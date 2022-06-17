@@ -97,7 +97,8 @@ abstract class BaseActivity<VB : ViewBinding, VM : BaseViewModel> : AppCompatAct
         loadingDialog.showLoading()
     }
 
-    protected fun initCommObserver() {
+    //公共的状态view的操作
+    private fun initCommObserver() {
 
         viewModel.dialogLoadingEvent.observe(this) {
             if (it.loadingState) {

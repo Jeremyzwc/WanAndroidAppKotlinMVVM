@@ -13,8 +13,9 @@ import com.qisan.wanandroid.databinding.ItemFooterBinding
 import com.qisan.wanandroid.databinding.ItemHomeBannerBinding
 
 /**
- * @author : leo
- * @date : 2020/5/12
+ * paging添加的页脚
+ * Created by QiSan 2022/5/29
+ * package com.qisan.wanandroid.base
  */
 class FooterAdapter : LoadStateAdapter<ViewBindingHolder<ItemFooterBinding>>() {
 
