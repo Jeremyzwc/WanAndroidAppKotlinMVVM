@@ -21,8 +21,6 @@ API是采用的鸿神开放[**玩 Android API**](http://www.wanandroid.com/blog/
 
 通过新的setMaxLifecycle方法实现Fragment的懒加载
 
-封装工具扩展类：CalendarExt、ContextExt、DateExt、EditTextExt、GsonExt、RxJavaExt、StringExt、SnackbarExt
-
 ## 最低兼容版本:23
 
 ## 主要使用的开源框架
