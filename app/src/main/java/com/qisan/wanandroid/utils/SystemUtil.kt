@@ -5,6 +5,8 @@ import android.content.pm.PackageManager
 import android.text.TextUtils
 import com.qisan.wanandroid.BuildConfig
 import com.qisan.wanandroid.WanApplication
+import java.io.Closeable
+import java.io.IOException
 
 /**
  * Created by qisan 2022/6/17
@@ -41,5 +43,13 @@ object SystemUtil {
 
     fun isBeta(): Boolean {
         return !BuildConfig.IS_PUBLISH
+    }
+
+    fun closeQuietly(closeable: Closeable?) {
+        try {
+            closeable?.close()
+        } catch (var2: IOException) {
+            var2.printStackTrace()
+        }
     }
 }
