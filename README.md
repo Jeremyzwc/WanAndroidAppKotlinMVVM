@@ -1,4 +1,4 @@
-# Kotlin+MVVM+Jetpack+Flow+协程架构实现的WanAndroid客户端的开发
+# Kotlin+Flow+协程+Jetpack+MVVM架构实现的WanAndroid客户端的开发搭建
 
 ## Github 地址:https://github.com/Jeremyzwc/WanAndroidAppKotlinMVVM
 
