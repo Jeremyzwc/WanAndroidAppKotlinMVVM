@@ -26,12 +26,14 @@ class NavigationTabAdapter(context: Context?, list: MutableList<NavigationBean>?
 
     override fun getBackground(position: Int): Int = -1
 
-    override fun getTitle(position: Int): ITabView.TabTitle {
+    override fun getTitle(position: Int): ITabView.TabTitle? {
         return ITabView.TabTitle.Builder()
-                .setContent(list[position].name)
-                .setTextColor(ContextCompat.getColor(context, R.color.colorPrimary),
-                        ContextCompat.getColor(context, R.color.Grey500))
-                .build()
+            .setContent(list[position].name)
+            ?.setTextColor(
+                ContextCompat.getColor(context, R.color.colorPrimary),
+                ContextCompat.getColor(context, R.color.Grey500)
+            )
+            ?.build()
     }
 
     override fun getCount(): Int = list.size

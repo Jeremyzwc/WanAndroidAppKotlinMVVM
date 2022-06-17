@@ -99,12 +99,14 @@ class NavigationFragment : BaseFragment<FragmentNavigationBinding, NavigationVie
         })
 
         viewBinding?.navigationTabLayout?.addOnTabSelectedListener(object : VerticalTabLayout.OnTabSelectedListener {
-            override fun onTabReselected(tab: TabView?, position: Int) {
-            }
 
             override fun onTabSelected(tab: TabView?, position: Int) {
                 bClickTab = true
                 selectTab(position)
+            }
+
+            override fun onTabReselected(tab: TabView?, position: Int) {
+
             }
         })
     }
