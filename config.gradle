@@ -1,14 +1,11 @@
 ext {
     compileSdkVersion = 31
     minSdkVersion = 23
-
     targetSdkVersion = 31
-    androidGradleVersion = '4.0.2'
 
     abiFilters = ['armeabi-v7a', 'arm64-v8a']
 
-
-    wanAndroidConfig = [releaseKeystorePath: projectDir.path + "/release/wanandroid.jks",
+    wanAndroidConfig = [releaseKeystorePath: projectDir.path + "/keystore/wanandroid.jks",
                       keyAlias           : "wan",
                       keyPassword        : "123456",
                       storePassword      : "123456"]
@@ -19,10 +16,12 @@ ext {
         InputStream inputStream = propertiesFile.newDataInputStream()
         properties.load(inputStream)
     }
-//    user = properties.getProperty("gpr.user")
-//    token = properties.getProperty("gpr.key")
+
+    //配置是否为测试环境包 不用debug来区分，发给测试的永远是混淆的release包
     IS_TEST_EVN = project.hasProperty("IS_TEST_EVN") ? project.ext["IS_TEST_EVN"] : properties.getProperty("IS_TEST_EVN")
+    //区分是发布包还是内部使用测试包，类似广告相关的在测试事需要使用测试广告
     IS_PUBLISH = project.hasProperty("IS_PUBLISH") ? project.ext["IS_PUBLISH"] : "true"
+
     BUILD_TYPE = project.hasProperty("BUILD_TYPES") ? project.ext["BUILD_TYPES"] : "release"
-    JIAGU_CHANNEL = project.hasProperty("JIAGU_CHANNEL")?project.ext["JIAGU_CHANNEL"]:"Google"
+
 }

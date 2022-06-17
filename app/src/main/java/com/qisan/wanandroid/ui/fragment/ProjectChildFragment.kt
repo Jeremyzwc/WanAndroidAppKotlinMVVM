@@ -11,6 +11,7 @@ import com.qisan.wanandroid.adapter.ProjectListAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentProjectChildBinding
 import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.ProjectChildViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 
@@ -86,9 +87,13 @@ class ProjectChildFragment : BaseFragment<FragmentProjectChildBinding, ProjectCh
             mAdapter.refresh()
         }
 
-        mAdapter.setItemClick(object : ItemClickListener{
-            override fun onItemClicked(v: View?, position: Int) {
 
+        mAdapter.setItemClick(object : ItemClickListener {
+            override fun onItemClicked(v: View?, position: Int) {
+                val data = mAdapter.getData(position)
+                if (data != null) {
+                    DetailContentActivity.startActivity(context, data.id, data.title, data.link)
+                }
             }
         })
     }

@@ -1,0 +1,15 @@
+
+
+android {
+
+    flavorDimensions "channel"
+    productFlavors {
+        google {}
+        official {}
+        oppo {}
+        vivo{}
+        huawei {}
+        samsung {}
+        xiaomi{}
+    }
+}

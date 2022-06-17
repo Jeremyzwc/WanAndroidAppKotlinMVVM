@@ -5,6 +5,8 @@ plugins {
 }
 apply plugin: 'kotlin-android'
 apply from: "${rootDir}/common.gradle"
+apply from: "${rootDir}/multi_channel.gradle"
+apply plugin: 'me.ele.mess'
 
 android {
     compileSdk rootProject.ext.compileSdkVersion
@@ -14,7 +16,10 @@ android {
         minSdk rootProject.ext.minSdkVersion
         targetSdk rootProject.ext.targetSdkVersion
         versionCode getLocalVersionCode()
-        versionName "1.0"
+        versionName "1.0.0"
+
+        buildConfigField("boolean", "IS_TEST_EVN", rootProject.ext.IS_TEST_EVN)
+        buildConfigField("boolean", "IS_PUBLISH", rootProject.ext.IS_PUBLISH)
 
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -24,21 +29,6 @@ android {
             abiFilters.addAll(rootProject.ext.abiFilters)
         }
 
-        flavorDimensions "versionCode"
-    }
-
-    flavorDimensions "channel"
-
-    productFlavors {
-        google {
-            dimension "channel"
-            manifestPlaceholders = [CHANNEL_NAME: "google"]
-        }
-
-        huawei {
-            dimension "channel"
-            manifestPlaceholders = [CHANNEL_NAME: "huawei"]
-        }
     }
 
     signingConfigs {
@@ -50,19 +40,27 @@ android {
         }
     }
 
+    productFlavors.all { flavor ->
+        flavor.dimension = "channel"
+        flavor.applicationId = "com.qisan.wanandroid"
+        flavor.signingConfig = signingConfigs.release
+        flavor.manifestPlaceholders = [
+                APP_NAME     : "WanAndroid",
+                CHANNEL_NAME : name,
+                FILE_PROVIDER: "com.qisan.wanandroid.fileprovider"]
+    }
+
     buildTypes {
         release {
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable false
         }
         debug {
             minifyEnabled false
             zipAlignEnabled false
-            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             debuggable true
         }
@@ -71,10 +69,12 @@ android {
 
     android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
+
+//            output.getPackageApplication().outputDirectory = new File(project.rootDir.absolutePath + "/releaseApks")
+
             if (variant.buildType.name == 'release') {
                 output.outputFileName =
                         "WanAndroid_${variant.flavorName}_${buildType.name}_v${variant.versionCode}_n${variant.versionName}_" + getNetworkType() + "_" + getPublish() + "_" + releaseTime() + ".apk"
-
             } else {
                 // debug
                 output.outputFileName = "${project.getName()}_${variant.flavorName}_${buildType.name}.apk"
@@ -90,7 +90,7 @@ android {
         jvmTarget = '1.8'
     }
 
-    buildFeatures{
+    buildFeatures {
         viewBinding true
     }
 }
@@ -140,3 +140,9 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:2.7"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:1.6.1"
 }
+//
+//tasks.whenTaskAdded {task ->
+//    if (task.name.contains("ApkListingFileRedirect")) {
+//        task.enabled = false
+//    }
+//}

@@ -19,12 +19,6 @@ android {
 }
 
 
-//repositories {
-//    flatDir {
-//        dirs 'libs'
-//    }
-//}
-
 ext {
 
     releaseTime = {

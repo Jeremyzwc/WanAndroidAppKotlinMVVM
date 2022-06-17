@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -9,6 +10,8 @@ import com.qisan.wanandroid.adapter.ArticleAdapter
 import com.qisan.wanandroid.adapter.FooterAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentWxchatChildBinding
+import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.WxChatChildViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 
@@ -84,6 +87,15 @@ class WxChatChildFragment: BaseFragment<FragmentWxchatChildBinding,WxChatChildVi
             viewBinding?.recyclerView?.swapAdapter(articleAdapter, true)
             articleAdapter.refresh()
         }
+
+        articleAdapter.setItemClick(object : ItemClickListener {
+            override fun onItemClicked(v: View?, position: Int) {
+                val data = articleAdapter.getData(position)
+                if (data != null) {
+                    DetailContentActivity.startActivity(context, data.id, data.title, data.link)
+                }
+            }
+        })
     }
 
 

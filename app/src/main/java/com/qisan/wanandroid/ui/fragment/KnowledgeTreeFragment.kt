@@ -10,6 +10,7 @@ import com.qisan.wanandroid.adapter.KnowledgeTreeAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentKnowledgeTreeBinding
 import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.KnowledgeTreeViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 

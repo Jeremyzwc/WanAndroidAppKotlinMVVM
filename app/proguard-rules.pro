@@ -41,7 +41,7 @@
 -packageobfuscationdictionary key-proguard.txt
 
 #-keep public class * extends android.app.Activity  #所有activity的子类不要去混淆
--keep public class * extends android.app.Fragment
+#-keep public class * extends android.app.Fragment
 -keep public class * extends android.app.Application
 #-keep public class * extends android.app.Service
 #-keep public class * extends android.content.BroadcastReceiver

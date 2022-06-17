@@ -61,7 +61,7 @@
         </provider>
 
         <meta-data
-            android:name="MUTI_CHANNEL"
+            android:name="MULTI_CHANNEL"
             android:value="${CHANNEL_NAME}" />
     </application>
 

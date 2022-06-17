@@ -1,5 +1,6 @@
 package com.qisan.wanandroid.ui.fragment
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentPagerAdapter
 import com.google.android.material.tabs.TabLayout
@@ -8,6 +9,8 @@ import com.qisan.wanandroid.adapter.CommonPageAdapter
 import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentHomeBinding
 import com.qisan.wanandroid.databinding.FragmentProjcetBinding
+import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.utils.saveAs
 import com.qisan.wanandroid.vm.ProjectViewModel
 
@@ -53,6 +56,8 @@ class ProjectFragment : BaseFragment<FragmentProjcetBinding, ProjectViewModel>()
         viewBinding?.viewPager?.run {
             addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(viewBinding?.tabLayout))
         }
+
+
     }
 
 
