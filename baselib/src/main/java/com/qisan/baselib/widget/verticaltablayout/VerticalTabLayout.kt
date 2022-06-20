@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.widget.verticaltablayout
+package com.qisan.baselib.widget.verticaltablayout
 
 import android.animation.AnimatorSet
 import android.animation.ValueAnimator
@@ -18,12 +18,12 @@ import androidx.fragment.app.FragmentManager
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import com.qisan.wanandroid.R
-import com.qisan.wanandroid.widget.verticaltablayout.adapter.TabAdapter
-import com.qisan.wanandroid.widget.verticaltablayout.utils.TabFragmentManager
-import com.qisan.wanandroid.widget.verticaltablayout.widget.ITabView
-import com.qisan.wanandroid.widget.verticaltablayout.widget.QTabView
-import com.qisan.wanandroid.widget.verticaltablayout.widget.TabView
+import com.qisan.baselib.R
+import com.qisan.baselib.widget.verticaltablayout.adapter.TabAdapter
+import com.qisan.baselib.widget.verticaltablayout.utils.TabFragmentManager
+import com.qisan.baselib.widget.verticaltablayout.widget.ITabView
+import com.qisan.baselib.widget.verticaltablayout.widget.QTabView
+import com.qisan.baselib.widget.verticaltablayout.widget.TabView
 import q.rorbin.badgeview.DisplayUtil
 import kotlin.math.ceil
 import kotlin.math.floor

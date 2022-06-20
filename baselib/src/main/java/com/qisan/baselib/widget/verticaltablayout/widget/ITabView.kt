@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.widget.verticaltablayout.widget
+package com.qisan.baselib.widget.verticaltablayout.widget
 
 import android.graphics.Color
 import android.graphics.drawable.Drawable

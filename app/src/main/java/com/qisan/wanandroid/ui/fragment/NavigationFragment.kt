@@ -6,8 +6,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.qisan.baselib.listener.ItemClickListener
-import com.qisan.baselib.wigget.verticaltablayout.VerticalTabLayout
-import com.qisan.baselib.wigget.verticaltablayout.widget.TabView
+import com.qisan.baselib.widget.verticaltablayout.VerticalTabLayout
+import com.qisan.baselib.widget.verticaltablayout.widget.TabView
 import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.adapter.NavigationAdapter

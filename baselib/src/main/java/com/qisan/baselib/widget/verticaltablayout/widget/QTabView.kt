@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.widget.verticaltablayout.widget
+package com.qisan.baselib.widget.verticaltablayout.widget
 
 import android.R
 import android.annotation.SuppressLint
@@ -11,7 +11,6 @@ import android.view.Gravity
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.Px
-import com.qisan.wanandroid.widget.verticaltablayout.widget.ITabView.*
 import q.rorbin.badgeview.Badge
 import q.rorbin.badgeview.DisplayUtil
 
@@ -24,17 +23,17 @@ class QTabView(context: Context) : TabView(context) {
     private var mContext: Context? = context
     private var mTitle: TextView? = null
     private var mBadgeView: Badge? = null
-    private var mTabIcon: TabIcon? = null
-    private var mTabTitle: TabTitle? = null
-    private var mTabBadge: TabBadge? = null
+    private var mTabIcon: ITabView.TabIcon? = null
+    private var mTabTitle: ITabView.TabTitle? = null
+    private var mTabBadge: ITabView.TabBadge? = null
     private var mChecked = false
     private var mDefaultBackground: Drawable? = null
 
 
     init {
-        mTabIcon = TabIcon.Builder().build()
-        mTabTitle = TabTitle.Builder().build()
-        mTabBadge = TabBadge.Builder().build()
+        mTabIcon = ITabView.TabIcon.Builder().build()
+        mTabTitle = ITabView.TabTitle.Builder().build()
+        mTabBadge = ITabView.TabBadge.Builder().build()
         initView()
         val attrs: IntArray = intArrayOf(R.attr.selectableItemBackgroundBorderless)
         val a = mContext!!.theme.obtainStyledAttributes(attrs)
@@ -152,7 +151,7 @@ class QTabView(context: Context) : TabView(context) {
         }
     }
 
-    override fun setBadge(badge: TabBadge?): QTabView? {
+    override fun setBadge(badge: ITabView.TabBadge?): QTabView? {
         if (badge != null) {
             mTabBadge = badge
         }
@@ -160,7 +159,7 @@ class QTabView(context: Context) : TabView(context) {
         return this
     }
 
-    override fun setIcon(icon: TabIcon?): QTabView? {
+    override fun setIcon(icon: ITabView.TabIcon?): QTabView? {
         if (icon != null) {
             mTabIcon = icon
         }
@@ -168,7 +167,7 @@ class QTabView(context: Context) : TabView(context) {
         return this
     }
 
-    override fun setTitle(title: TabTitle?): QTabView? {
+    override fun setTitle(title: ITabView.TabTitle?): QTabView? {
         if (title != null) {
             mTabTitle = title
         }
@@ -191,15 +190,15 @@ class QTabView(context: Context) : TabView(context) {
         return this
     }
 
-    override fun getBadge(): TabBadge? {
+    override fun getBadge(): ITabView.TabBadge? {
         return mTabBadge
     }
 
-    override fun getIcon(): TabIcon? {
+    override fun getIcon(): ITabView.TabIcon? {
         return mTabIcon
     }
 
-    override fun getTitle(): TabTitle? {
+    override fun getTitle(): ITabView.TabTitle? {
         return mTabTitle
     }
 

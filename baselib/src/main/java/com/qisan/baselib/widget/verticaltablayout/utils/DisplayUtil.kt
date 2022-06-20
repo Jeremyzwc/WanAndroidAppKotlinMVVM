@@ -1,4 +1,4 @@
-package com.qisan.wanandroid.widget.verticaltablayout.utils
+package com.qisan.baselib.widget.verticaltablayout.utils
 
 import android.content.Context
 

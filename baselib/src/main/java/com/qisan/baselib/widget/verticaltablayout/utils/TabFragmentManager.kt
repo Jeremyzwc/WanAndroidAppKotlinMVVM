@@ -1,9 +1,9 @@
-package com.qisan.wanandroid.widget.verticaltablayout.utils
+package com.qisan.baselib.widget.verticaltablayout.utils
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.qisan.wanandroid.widget.verticaltablayout.VerticalTabLayout
-import com.qisan.wanandroid.widget.verticaltablayout.widget.TabView
+import com.qisan.baselib.widget.verticaltablayout.VerticalTabLayout
+import com.qisan.baselib.widget.verticaltablayout.widget.TabView
 
 /**
  * Created by QiSan 2022/6/17
