@@ -12,21 +12,22 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.qisan.baselib.event.LoginEvent
+import com.qisan.baselib.ext.saveAs
+import com.qisan.baselib.utils.SettingUtil
+import com.qisan.baselib.utils.ToastUtils
+import com.qisan.mvvm.base.activity.BaseVMActivity
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.databinding.ActivityMainBinding
 import com.qisan.wanandroid.databinding.NavHeaderMainBinding
-import com.qisan.wanandroid.event.LoginEvent
 import com.qisan.wanandroid.global.WanUser
 import com.qisan.wanandroid.ui.fragment.*
 import com.qisan.wanandroid.utils.DialogUtil
-import com.qisan.wanandroid.utils.SettingUtil
-import com.qisan.wanandroid.utils.ToastUtils
-import com.qisan.wanandroid.utils.saveAs
+
 import com.qisan.wanandroid.vm.MainViewModel
 
 
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
 
     private val homeFragment = HomeFragment()
     private val squareFragment = SquareFragment()

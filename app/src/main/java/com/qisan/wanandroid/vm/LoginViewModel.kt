@@ -2,7 +2,7 @@ package com.qisan.wanandroid.vm
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.qisan.wanandroid.base.BaseViewModel
+import com.qisan.mvvm.base.vm.BaseViewModel
 import com.qisan.wanandroid.entity.LoginInfo
 import com.qisan.wanandroid.http.next
 import com.qisan.wanandroid.http.postFlow

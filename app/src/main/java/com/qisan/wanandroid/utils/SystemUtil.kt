@@ -3,8 +3,8 @@ package com.qisan.wanandroid.utils
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.text.TextUtils
+import com.qisan.baselib.BaseApp.Companion.context
 import com.qisan.wanandroid.BuildConfig
-import com.qisan.wanandroid.WanApplication
 import java.io.Closeable
 import java.io.IOException
 
@@ -21,7 +21,7 @@ object SystemUtil {
             channel
         } else {
             try {
-                val appInfo: ApplicationInfo = WanApplication.context.packageManager.getApplicationInfo(WanApplication.context.packageName, PackageManager.GET_META_DATA)
+                val appInfo: ApplicationInfo = context.packageManager.getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
                 channel = appInfo.metaData.getString("MULTI_CHANNEL")
                 if (TextUtils.isEmpty(channel)) {
                     channel = "google"

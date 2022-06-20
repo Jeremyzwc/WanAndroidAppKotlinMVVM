@@ -12,7 +12,7 @@
         android:orientation="horizontal"
         tools:ignore="UselessParent">
 
-        <com.qisan.wanandroid.widget.verticaltablayout.VerticalTabLayout
+        <com.qisan.baselib.wigget.verticaltablayout.VerticalTabLayout
             android:id="@+id/navigation_tab_layout"
             android:layout_width="@dimen/dp_110"
             android:layout_height="match_parent"

@@ -5,16 +5,15 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.qisan.baselib.adapter.ViewBindingHolder
+import com.qisan.baselib.listener.OnMultiClickListener
+import com.qisan.baselib.utils.GlideUtils
+import com.qisan.baselib.utils.ToastUtils
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.WanApplication
-import com.qisan.wanandroid.databinding.ItemArticleBinding
 import com.qisan.wanandroid.databinding.ItemProjectListBinding
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.global.WanUser
-import com.qisan.wanandroid.listener.OnMultiClickListener
 import com.qisan.wanandroid.ui.activity.LoginActivity
-import com.qisan.wanandroid.utils.GlideUtils
-import com.qisan.wanandroid.utils.ToastUtils
 
 /**
  * Created by qisan 2022/6/15
@@ -48,7 +47,7 @@ class ProjectListAdapter(private val context: Context): BasePagingDataAdapter<Ar
                     }
                 }else{
                     LoginActivity.startActivity(context)
-                    ToastUtils.show(WanApplication.context.resources.getString(R.string.login_tint))
+                    ToastUtils.show(context.resources.getString(R.string.login_tint))
                 }
             }
         })

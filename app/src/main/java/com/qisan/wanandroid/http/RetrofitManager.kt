@@ -1,10 +1,10 @@
 package com.qisan.wanandroid.http
 
+import com.qisan.baselib.BaseApp.Companion.context
+import com.qisan.baselib.utils.FileUtil
 import com.qisan.wanandroid.BuildConfig
-import com.qisan.wanandroid.WanApplication
 import com.qisan.wanandroid.http.interceptor.HeaderInterceptor
 import com.qisan.wanandroid.http.interceptor.SaveCookieInterceptor
-import com.qisan.wanandroid.utils.FileUtil
 import com.qisan.wanandroid.utils.SystemUtil
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -77,7 +77,7 @@ private fun initSslContext() {
     // 获取自签名证书集合，由证书工厂管理
     var inputStream: InputStream? = null
     try {
-        inputStream =   ByteArrayInputStream(FileUtil.readBinaryFileContent(WanApplication.context.assets.open("ssl_config.txt")))
+        inputStream =   ByteArrayInputStream(FileUtil.readBinaryFileContent(context.assets.open("ssl_config.txt")))
 
         val certificateFactory = CertificateFactory.getInstance("X.509")
         val keyStore = KeyStore.getInstance(KeyStore.getDefaultType())

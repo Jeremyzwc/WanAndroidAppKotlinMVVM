@@ -28,3 +28,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "WanAndroidAppKotlinMVVM"
 include ':app'
+include ':mvvmArch'
+include ':baselib'

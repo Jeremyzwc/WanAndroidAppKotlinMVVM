@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import cn.bingoogolapple.bgabanner.BGABanner
-import com.qisan.wanandroid.databinding.ItemArticleBinding
+import com.qisan.baselib.adapter.BaseRvAdapter
+import com.qisan.baselib.adapter.ViewBindingHolder
+import com.qisan.baselib.utils.GlideUtils
 import com.qisan.wanandroid.databinding.ItemHomeBannerBinding
 import com.qisan.wanandroid.entity.Banner
 import com.qisan.wanandroid.ui.activity.DetailContentActivity
-import com.qisan.wanandroid.utils.GlideUtils
 
 /**
  * Created by qisan 2022/5/31
@@ -57,7 +58,6 @@ class HomeBannerAdapter(var context: Context?) : BaseRvAdapter<MutableList<Banne
         }
 
     }
-
 
 }
 

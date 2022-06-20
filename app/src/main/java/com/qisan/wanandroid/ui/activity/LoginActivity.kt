@@ -5,21 +5,21 @@ import android.content.Intent
 import android.view.MenuItem
 import com.google.gson.Gson
 import com.jeremyliao.liveeventbus.LiveEventBus
+import com.qisan.baselib.event.LoginEvent
+import com.qisan.baselib.utils.SharePreferenceUtils
+import com.qisan.baselib.utils.ToastUtils
+import com.qisan.mvvm.base.activity.BaseVMActivity
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.databinding.ActivityLoginBinding
-import com.qisan.wanandroid.event.LoginEvent
 import com.qisan.wanandroid.global.WanUser
-import com.qisan.wanandroid.utils.SharePreferenceUtils
-import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.vm.LoginViewModel
 
 /**
  * Created by qisan 2022/6/15
  * com.qisan.wanandroid.ui.activity
  */
-class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>() {
+class LoginActivity : BaseVMActivity<ActivityLoginBinding, LoginViewModel>() {
 
     companion object {
         fun startActivity(context: Context) {

@@ -6,9 +6,9 @@ import android.graphics.Color
 import android.util.AttributeSet
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
+import com.qisan.baselib.utils.ColorUtil
+import com.qisan.baselib.utils.SettingUtil
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.utils.ColorUtil
-import com.qisan.wanandroid.utils.SettingUtil
 
 /**
  * Created by qisan 2022/6/16

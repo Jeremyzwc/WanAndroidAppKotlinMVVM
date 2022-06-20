@@ -15,22 +15,22 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.just.agentweb.AgentWeb
 import com.just.agentweb.WebChromeClient
+import com.qisan.baselib.utils.ToastUtils
+import com.qisan.mvvm.base.activity.BaseVMActivity
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.base.BaseActivity
 import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.databinding.ActivityDetailContentBinding
 import com.qisan.wanandroid.ext.getAgentWeb
 import com.qisan.wanandroid.global.WanUser
-import com.qisan.wanandroid.utils.ToastUtils
 import com.qisan.wanandroid.vm.DetailContentViewModel
-import com.qisan.wanandroid.webclient.WebClientFactory
+import com.qisan.baselib.webclient.WebClientFactory
 import com.qisan.wanandroid.widget.NestedScrollAgentWebView
 
 /**
  * Created by qisan 2022/6/16
  * com.qisan.wanandroid.ui.activity
  */
-class DetailContentActivity: BaseActivity<ActivityDetailContentBinding,DetailContentViewModel>() {
+class DetailContentActivity: BaseVMActivity<ActivityDetailContentBinding, DetailContentViewModel>() {
 
     private var mAgentWeb: AgentWeb? = null
 

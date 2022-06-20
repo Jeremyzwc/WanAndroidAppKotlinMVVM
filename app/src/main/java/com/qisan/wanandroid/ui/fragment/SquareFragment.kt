@@ -7,12 +7,12 @@ import android.view.View
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.adapter.ArticleAdapter
 import com.qisan.wanandroid.adapter.FooterAdapter
-import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentSquareBinding
-import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.baselib.listener.ItemClickListener
 import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.SquareViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
@@ -21,7 +21,7 @@ import com.qisan.wanandroid.widget.RvItemDecoration
  * Created by qisan 2022/5/25
  * com.qisan.wanandroid.ui.fragment
  */
-class SquareFragment : BaseFragment<FragmentSquareBinding, SquareViewModel>() {
+class SquareFragment : BaseVMFragment<FragmentSquareBinding, SquareViewModel>() {
 
     private val articleAdapter by lazy {
         ArticleAdapter(requireActivity())

@@ -3,14 +3,10 @@ package com.qisan.wanandroid.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ProgressBar
-import android.widget.TextView
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
-import androidx.recyclerview.widget.RecyclerView
-import com.qisan.wanandroid.R
+import com.qisan.baselib.adapter.ViewBindingHolder
 import com.qisan.wanandroid.databinding.ItemFooterBinding
-import com.qisan.wanandroid.databinding.ItemHomeBannerBinding
 
 /**
  * paging添加的页脚

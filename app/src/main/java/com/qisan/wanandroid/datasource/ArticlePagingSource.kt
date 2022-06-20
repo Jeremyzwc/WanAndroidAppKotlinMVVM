@@ -1,12 +1,10 @@
 package com.qisan.wanandroid.datasource
 
-import com.qisan.wanandroid.base.BasePagingSource
-import com.qisan.wanandroid.base.BaseViewModel
+import com.qisan.baselib.paging.BasePagingSource
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.http.BaseResponse
 import com.qisan.wanandroid.http.apiService
 import com.qisan.wanandroid.vm.CommonViewModel
-import com.qisan.wanandroid.vm.HomeViewModel
 
 /**
  * Created by QiSan 2022/5/30

@@ -5,21 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.qisan.baselib.adapter.BaseRvAdapter
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.databinding.ItemNavigationListBinding
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.entity.NavigationBean
-import com.qisan.wanandroid.utils.CommonUtil
-import com.qisan.wanandroid.utils.DisplayManager
 import com.zhy.view.flowlayout.FlowLayout
 import com.zhy.view.flowlayout.TagAdapter
 import com.zhy.view.flowlayout.TagFlowLayout
+import com.qisan.baselib.adapter.ViewBindingHolder
+import com.qisan.baselib.utils.CommonUtil
+import com.qisan.baselib.utils.DisplayManager
 
 /**
  * Created by QiSan 2022/6/15
  * package com.qisan.wanandroid.adapter
  */
-class NavigationAdapter: BaseRvAdapter<NavigationBean,ItemNavigationListBinding>() {
+class NavigationAdapter: BaseRvAdapter<NavigationBean, ItemNavigationListBinding>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewBindingHolder<ItemNavigationListBinding> {
         val inflate = ItemNavigationListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewBindingHolder(inflate)

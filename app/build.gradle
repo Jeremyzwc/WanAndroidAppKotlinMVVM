@@ -107,7 +107,7 @@ android {
 
 dependencies {
 
-    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.core:core-ktx:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.6.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -117,15 +117,13 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     //协程
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.1"
-    //LiveData处理activity销毁重建的数据倒灌问题，可以被多个观察者订阅
-    implementation 'com.kunminx.arch:unpeek-livedata:7.4.0'
+
     //导航组件
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.2"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.2"
     //适配
     implementation 'com.github.JessYanCoding:AndroidAutoSize:v1.2.1'
 
-    implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     //打印http请求日志
@@ -133,22 +131,11 @@ dependencies {
     //下拉刷新
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.2.0-alpha01"
 
-    implementation "com.github.bumptech.glide:glide:4.13.2"
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.13.1'
     //banner图控件
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
 
-    implementation 'q.rorbin:badgeview:1.1.2'
-    implementation 'com.hyman:flowlayout-lib:1.1.2'
-    //基于LiveData代替EventBus的消息总线库，具有生命周期感知
-    implementation 'io.github.jeremyliao:live-event-bus-x:1.8.0'
-
-    implementation 'com.just.agentweb:agentweb-androidx:4.1.4'
-
-    // leakCanary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:2.7"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:1.6.1"
+    implementation project(':mvvmArch')
 }
 //
 //tasks.whenTaskAdded {task ->

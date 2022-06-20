@@ -1,7 +1,7 @@
 package com.qisan.wanandroid.vm
 
 import androidx.lifecycle.viewModelScope
-import com.qisan.wanandroid.base.BaseViewModel
+import com.qisan.mvvm.base.vm.BaseViewModel
 import com.qisan.wanandroid.http.launchFlow
 import kotlinx.coroutines.launch
 

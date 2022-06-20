@@ -8,7 +8,6 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.qisan.wanandroid.base.BaseViewModel
 import com.qisan.wanandroid.datasource.ArticlePagingSource
 import com.qisan.wanandroid.entity.Article
 import com.qisan.wanandroid.entity.Banner

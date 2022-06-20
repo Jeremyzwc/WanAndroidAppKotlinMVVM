@@ -1,10 +1,10 @@
 package com.qisan.wanandroid.global
 
 import com.google.gson.Gson
+import com.qisan.baselib.utils.SharePreferenceUtils
 import com.qisan.wanandroid.constant.Constant
 import com.qisan.wanandroid.entity.LoginInfo
-import com.qisan.wanandroid.entity.UserInfo
-import com.qisan.wanandroid.utils.SharePreferenceUtils
+
 
 /**
  * Created by QiSan 2022/6/15

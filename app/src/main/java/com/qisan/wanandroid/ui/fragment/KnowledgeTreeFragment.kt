@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
-import com.qisan.wanandroid.adapter.FooterAdapter
 import com.qisan.wanandroid.adapter.KnowledgeTreeAdapter
-import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentKnowledgeTreeBinding
-import com.qisan.wanandroid.listener.ItemClickListener
-import com.qisan.wanandroid.ui.activity.DetailContentActivity
+import com.qisan.baselib.listener.ItemClickListener
 import com.qisan.wanandroid.vm.KnowledgeTreeViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
 
@@ -18,7 +16,7 @@ import com.qisan.wanandroid.widget.RvItemDecoration
  * Created by qisan 2022/6/14
  * com.qisan.wanandroid.ui.fragment
  */
-class KnowledgeTreeFragment: BaseFragment<FragmentKnowledgeTreeBinding, KnowledgeTreeViewModel>() {
+class KnowledgeTreeFragment: BaseVMFragment<FragmentKnowledgeTreeBinding, KnowledgeTreeViewModel>() {
 
     companion object{
         fun newInstance(): KnowledgeTreeFragment{
@@ -70,7 +68,7 @@ class KnowledgeTreeFragment: BaseFragment<FragmentKnowledgeTreeBinding, Knowledg
             viewModel.getKnowledgeTreeList()
         }
 
-        knowledgeTreeAdapter.setItemClick(object : ItemClickListener{
+        knowledgeTreeAdapter.setItemClick(object : ItemClickListener {
             override fun onItemClicked(v: View?, position: Int) {
 
             }

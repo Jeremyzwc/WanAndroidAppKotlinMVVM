@@ -5,14 +5,14 @@ import android.view.View
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.adapter.ArticleAdapter
 import com.qisan.wanandroid.adapter.FooterAdapter
 import com.qisan.wanandroid.adapter.HomeBannerAdapter
-import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentHomeBinding
 import com.qisan.wanandroid.entity.Banner
-import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.baselib.listener.ItemClickListener
 import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.HomeViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
@@ -21,7 +21,7 @@ import com.qisan.wanandroid.widget.RvItemDecoration
  * Created by qisan 2022/5/25
  * com.qisan.wanandroid.ui.fragment
  */
-class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
+class HomeFragment : BaseVMFragment<FragmentHomeBinding, HomeViewModel>() {
 
     private val homeBannerAdapter by lazy {
         HomeBannerAdapter(context)
@@ -94,7 +94,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>() {
         }
 
 
-        articleAdapter.setItemClick(object : ItemClickListener{
+        articleAdapter.setItemClick(object : ItemClickListener {
             override fun onItemClicked(v: View?, position: Int) {
                 val data = articleAdapter.getData(position)
                 if (data != null) {

@@ -2,10 +2,10 @@ package com.qisan.wanandroid.adapter
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import com.qisan.baselib.wigget.verticaltablayout.adapter.TabAdapter
+import com.qisan.baselib.wigget.verticaltablayout.widget.ITabView
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.entity.NavigationBean
-import com.qisan.wanandroid.widget.verticaltablayout.adapter.TabAdapter
-import com.qisan.wanandroid.widget.verticaltablayout.widget.ITabView
 
 /**
  * Created by chenxz on 2018/5/13.

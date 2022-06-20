@@ -5,12 +5,12 @@ import android.view.View
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.adapter.ArticleAdapter
 import com.qisan.wanandroid.adapter.FooterAdapter
-import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentWxchatChildBinding
-import com.qisan.wanandroid.listener.ItemClickListener
+import com.qisan.baselib.listener.ItemClickListener
 import com.qisan.wanandroid.ui.activity.DetailContentActivity
 import com.qisan.wanandroid.vm.WxChatChildViewModel
 import com.qisan.wanandroid.widget.RvItemDecoration
@@ -20,7 +20,7 @@ import com.qisan.wanandroid.widget.RvItemDecoration
  * Created by qisan 2022/6/10
  * com.qisan.wanandroid.ui.fragment
  */
-class WxChatChildFragment: BaseFragment<FragmentWxchatChildBinding,WxChatChildViewModel>() {
+class WxChatChildFragment: BaseVMFragment<FragmentWxchatChildBinding, WxChatChildViewModel>() {
 
     private var weChatId: Int = 0
 

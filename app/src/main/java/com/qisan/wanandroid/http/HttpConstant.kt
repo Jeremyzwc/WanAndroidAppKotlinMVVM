@@ -1,6 +1,6 @@
 package com.qisan.wanandroid.http
 
-import com.qisan.wanandroid.utils.SharePreferenceUtils
+import com.qisan.baselib.utils.SharePreferenceUtils
 
 /**
  * Created by qisan 2022/5/26

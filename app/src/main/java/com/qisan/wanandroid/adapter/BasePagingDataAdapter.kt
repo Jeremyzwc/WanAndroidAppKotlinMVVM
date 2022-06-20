@@ -7,11 +7,11 @@ import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.paging.filter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.qisan.wanandroid.listener.ItemClickListener
-import com.qisan.wanandroid.listener.ItemLongClickListener
-import com.qisan.wanandroid.listener.OnMultiClickListener
+import com.qisan.baselib.adapter.ViewBindingHolder
+import com.qisan.baselib.listener.ItemClickListener
+import com.qisan.baselib.listener.ItemLongClickListener
+import com.qisan.baselib.listener.OnMultiClickListener
 import com.qisan.wanandroid.vm.CommonViewModel
 
 
@@ -33,7 +33,7 @@ abstract class BasePagingDataAdapter<T : Any, VB : ViewBinding> : PagingDataAdap
 
     companion object {
         fun <T : Any> itemCallback(
-            areItemsTheSame: (T, T) -> Boolean = { oldItem, newItem -> oldItem == newItem },
+            areItemsTheSame: (T, T) -> Boolean = { oldItem, newItem -> oldItem.javaClass == newItem.javaClass },
             areContentsTheSame: (T, T) -> Boolean = { oldItem, newItem -> oldItem == newItem },
         ): DiffUtil.ItemCallback<T> {
             return object : DiffUtil.ItemCallback<T>() {
@@ -120,9 +120,4 @@ abstract class BasePagingDataAdapter<T : Any, VB : ViewBinding> : PagingDataAdap
     fun removeItem(position: Int) {
         filterItem { it != getData(position) }
     }
-
-}
-
-open class ViewBindingHolder<VB : ViewBinding>(val binding: VB) : RecyclerView.ViewHolder(binding.root) {
-
 }

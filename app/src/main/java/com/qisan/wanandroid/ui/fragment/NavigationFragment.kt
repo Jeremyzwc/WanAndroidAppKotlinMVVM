@@ -5,21 +5,21 @@ import android.view.View
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.qisan.baselib.listener.ItemClickListener
+import com.qisan.baselib.wigget.verticaltablayout.VerticalTabLayout
+import com.qisan.baselib.wigget.verticaltablayout.widget.TabView
+import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.adapter.NavigationAdapter
 import com.qisan.wanandroid.adapter.NavigationTabAdapter
-import com.qisan.wanandroid.base.BaseFragment
 import com.qisan.wanandroid.databinding.FragmentNavigationBinding
-import com.qisan.wanandroid.listener.ItemClickListener
 import com.qisan.wanandroid.vm.NavigationViewModel
-import com.qisan.wanandroid.widget.verticaltablayout.VerticalTabLayout
-import com.qisan.wanandroid.widget.verticaltablayout.widget.TabView
 
 /**
  * Created by qisan 2022/6/14
  * com.qisan.wanandroid.ui.fragment
  */
-class NavigationFragment : BaseFragment<FragmentNavigationBinding, NavigationViewModel>() {
+class NavigationFragment : BaseVMFragment<FragmentNavigationBinding, NavigationViewModel>() {
 
     companion object {
         fun newInstance(): NavigationFragment {

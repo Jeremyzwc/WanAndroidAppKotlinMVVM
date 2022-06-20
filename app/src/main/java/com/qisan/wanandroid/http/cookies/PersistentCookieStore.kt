@@ -4,7 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.text.TextUtils
 import android.util.Log
-import com.qisan.wanandroid.WanApplication
+import com.qisan.baselib.BaseApp.Companion.context
+import com.qisan.wanandroid.WanApp
 import okhttp3.Cookie
 import okhttp3.HttpUrl
 import java.io.*
@@ -24,7 +25,7 @@ class PersistentCookieStore {
     private val cookiePrefs: SharedPreferences
 
     init {
-        cookiePrefs = WanApplication.context.getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE)
+        cookiePrefs = context.getSharedPreferences(COOKIE_PREFS, Context.MODE_PRIVATE)
         var prefsMap = cookiePrefs.all
 
 
