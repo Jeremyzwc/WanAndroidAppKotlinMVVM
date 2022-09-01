@@ -47,8 +47,12 @@
             android:screenOrientation="fullSensor" />
 
         <activity
-        android:name=".ui.activity.DetailContentActivity"
-        android:screenOrientation="fullSensor" />
+            android:name=".ui.activity.DetailContentActivity"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".ui.activity.ScanRecordActivity"
+            android:screenOrientation="fullSensor" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

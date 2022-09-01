@@ -1,6 +1,7 @@
 package com.qisan.wanandroid.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -300,9 +301,9 @@ class MainActivity : BaseVMActivity<ActivityMainBinding, MainViewModel>() {
                 }
             }
             R.id.nav_setting -> {
-//                Intent(this@MainActivity, SettingActivity::class.java).run {
-//                    startActivity(this)
-//                }
+                Intent(this@MainActivity, ScanRecordActivity::class.java).run {
+                    startActivity(this)
+                }
             }
             R.id.nav_logout -> {
 

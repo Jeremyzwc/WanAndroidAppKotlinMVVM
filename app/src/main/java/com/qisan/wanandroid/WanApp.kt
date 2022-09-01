@@ -2,6 +2,7 @@ package com.qisan.wanandroid
 
 import com.qisan.baselib.BaseApp
 import com.qisan.baselib.utils.DisplayManager
+import com.qisan.wanandroid.room.WanDB
 
 /**
  * Created by qisan 2022/5/18
@@ -13,6 +14,8 @@ class WanApp : BaseApp() {
         super.onCreate()
 
         DisplayManager.init(this)
+
+        WanDB.getInstance(this)
     }
 
 }

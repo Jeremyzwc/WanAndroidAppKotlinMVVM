@@ -24,6 +24,7 @@ import com.qisan.wanandroid.ext.getAgentWeb
 import com.qisan.wanandroid.global.WanUser
 import com.qisan.wanandroid.vm.DetailContentViewModel
 import com.qisan.baselib.webclient.WebClientFactory
+import com.qisan.wanandroid.room.ScanRecordEnity
 import com.qisan.wanandroid.widget.NestedScrollAgentWebView
 
 /**
@@ -65,6 +66,8 @@ class DetailContentActivity: BaseVMActivity<ActivityDetailContentBinding, Detail
             shareId = it.getInt(Constant.CONTENT_ID_KEY, -1)
             shareTitle = it.getString(Constant.CONTENT_TITLE_KEY, "")
             shareUrl = it.getString(Constant.CONTENT_URL_KEY, "")
+
+            viewModel.recordScanContent(ScanRecordEnity(shareId,shareTitle,shareUrl))
         }
 
         viewBinding?.toolbarLayout?.toolbar.apply {

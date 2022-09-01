@@ -96,6 +96,12 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //Room官方建议：在`android`块中添加以下代码块，以从软件包中排除原子函数模块并防止出现警告
+    packagingOptions {
+        exclude 'META-INF/atomicfu.kotlin_module'
+    }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
@@ -136,6 +142,10 @@ dependencies {
     implementation 'com.github.bingoogolapple:BGABanner-Android:3.0.1'
 
     implementation project(':mvvmArch')
+
+    implementation "androidx.room:room-ktx:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
+
 }
 //
 //tasks.whenTaskAdded {task ->
