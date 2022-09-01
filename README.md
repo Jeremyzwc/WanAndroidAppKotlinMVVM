@@ -4,7 +4,7 @@
 
 ## 简介
 
-采用 `Kotlin` 语言编写，采用MVVM架构，结合ViewMdel、Lifecycle、paging、LiveData、navigation等Jetpack组件以及Retrofit使用。
+采用 `Kotlin` 语言编写，采用MVVM架构，结合ViewMdel、Lifecycle、paging、LiveData、navigation、Room等Jetpack组件以及Retrofit使用。
 API是采用的鸿神开放[**玩 Android API**](http://www.wanandroid.com/blog/show/2)
 本项目的大部分资源文件和部分代码以及ui效果都是参照WanAndroid站内的[开源WanAndroid项目](https://github.com/iceCola7/WanAndroid), 因为本项目只是为了展示Kotlin+Jetpack+MVVM的开发
 架构，并不是再造一个完整的WanAndroid客户端。
@@ -15,7 +15,7 @@ API是采用的鸿神开放[**玩 Android API**](http://www.wanandroid.com/blog/
 
 使用Flow+Retrofit实现Http的链式请求
 
-封装基类:BaseActivity、BaseFragment、BaseViewModel、BasePagingSource、BasePagingDataAdapter、BaseRvAdapter，BaseLifecycleDialog
+封装基类:BaseVMActivity、BaseVMFragment、BaseViewModel、BasePagingSource、BasePagingDataAdapter、BaseRvAdapter，BaseLifecycleDialog
 
 使用反射实现ViewBinding和ViewModel的模板式绑定
 
