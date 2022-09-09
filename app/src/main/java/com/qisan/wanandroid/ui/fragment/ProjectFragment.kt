@@ -9,6 +9,7 @@ import com.qisan.mvvm.base.fragment.BaseVMFragment
 import com.qisan.wanandroid.R
 import com.qisan.wanandroid.databinding.FragmentProjcetBinding
 import com.qisan.wanandroid.vm.ProjectViewModel
+import java.lang.ref.WeakReference
 
 /**
  * Created by qisan 2022/5/25
@@ -35,6 +36,7 @@ class ProjectFragment : BaseVMFragment<FragmentProjcetBinding, ProjectViewModel>
                 tabList.add(item.name)
             }
 
+            viewBinding?.viewPager?.offscreenPageLimit = tabList.size
             projectAdapter = CommonPageAdapter(childFragmentManager,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments,tabList)
             viewBinding?.viewPager?.adapter = projectAdapter

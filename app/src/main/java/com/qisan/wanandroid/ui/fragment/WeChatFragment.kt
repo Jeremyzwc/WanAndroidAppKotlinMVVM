@@ -40,6 +40,7 @@ class WeChatFragment : BaseVMFragment<FragmentWechatBinding, WeChatViewModel>() 
                 tabList.add(item.name)
             }
 
+            viewBinding?.viewPager?.offscreenPageLimit = tabList.size
             wxChatPageAdapter = CommonPageAdapter(childFragmentManager,
                 FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,fragments,tabList)
             viewBinding?.viewPager?.adapter = wxChatPageAdapter
